@@ -3,7 +3,6 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyAttachment</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&family=Inter:wght@400;700&display=swap');
@@ -138,7 +137,32 @@
             }
         }
 
-        /* Media queries for responsiveness */
+        /* Media queries for laptops */
+        @media (max-width: 1200px) {
+            .header .title {
+                font-size: 22px;
+            }
+            .header .learn-box {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            .main-content .main-title {
+                font-size: 60px;
+            }
+            .main-content .sub-title {
+                font-size: 20px;
+            }
+            .button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+            .floating-image-top,
+            .floating-image-bottom {
+                width: 60vw;
+            }
+        }
+
+        /* Media queries for tablets */
         @media (max-width: 768px) {
             .header {
                 flex-direction: column;
@@ -172,6 +196,7 @@
             }
         }
 
+        /* Media queries for phones */
         @media (max-width: 480px) {
             .header {
                 padding: 5px 10px;
