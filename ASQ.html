@@ -3,10 +3,10 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Attachment Style Questionnaire</title>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* Existing CSS styles */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #FFF9F3;
@@ -16,17 +16,18 @@
             align-items: center;
             flex-direction: column;
             padding: 20px;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
-            .container {
+        .container {
             max-width: 800px;
             width: 100%;
             background-color: #FFF9F3;
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
-
 
         h1 {
             font-family: 'Hanken Grotesk', sans-serif;
@@ -123,26 +124,87 @@
             font-size: 1em;
         }
 
-        .floating-graphic {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            opacity: 0.3;
-            animation: float 5s infinite;
-        }
-
-        .floating-left {
-            left: 0;
-        }
-
-        .floating-right {
-            right: 0;
-        }
-
         @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
             100% { transform: translateY(0); }
+        }
+
+        .question-container {
+            margin-bottom: 20px;
+        }
+
+        .question-label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .options-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .option-label {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .options-container {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+
+            .option {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .option label {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            .question-container {
+                margin-bottom: 30px;
+            }
+        }
+
+        /* Cloud styles */
+        .cloud {
+            position: absolute;
+            width: 100px;
+            height: 60px;
+            background-size: cover;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .cloud:nth-child(1) {
+            background-image: url('cloud1.png'); /* Replace with your cloud image URLs */
+            top: 10%;
+            left: 0;
+        }
+
+        .cloud:nth-child(2) {
+            background-image: url('cloud2.png'); /* Replace with your cloud image URLs */
+            top: 30%;
+            right: 0;
+        }
+
+        .cloud:nth-child(3) {
+            background-image: url('cloud3.png'); /* Replace with your cloud image URLs */
+            top: 50%;
+            left: 0;
+        }
+
+        @media (max-width: 768px) {
+            .cloud:nth-child(1),
+            .cloud:nth-child(2),
+            .cloud:nth-child(3) {
+                top: auto;
+                bottom: 0;
+            }
         }
     </style>
     <script>
@@ -162,42 +224,29 @@
                 if (name.match(/q(7|11|12|16)/)) dismissing += value;
             });
 
-            document.getElementById('secure-score').textContent = `Score: ${secure}`;
-            document.getElementById('fearful-score').textContent = `Score: ${fearful}`;
-            document.getElementById('preoccupied-score').textContent = `Score: ${preoccupied}`;
-            document.getElementById('dismissing-score').textContent = `Score: ${dismissing}`;
-            document.getElementById('results').style.display = 'block';
+            const secureMean = secure / 8;
+            const fearfulMean = fearful / 6;
+            const preoccupiedMean = preoccupied / 8;
+            const dismissingMean = dismissing / 4;
+
+            localStorage.setItem('secureMean', secureMean);
+            localStorage.setItem('fearfulMean', fearfulMean);
+            localStorage.setItem('preoccupiedMean', preoccupiedMean);
+            localStorage.setItem('dismissingMean', dismissingMean);
+
+            window.location.href = 'file:///C:/Users/shahi/Downloads/results.html';
         }
-
-        function addFloatingGraphics() {
-            const container = document.querySelector('.container');
-            const graphicsCount = Math.floor(container.scrollHeight / 300);
-            
-            for (let i = 0; i < graphicsCount; i++) {
-                const graphicLeft = document.createElement('div');
-                graphicLeft.classList.add('floating-graphic', 'floating-left');
-                graphicLeft.style.top = `${i * 300 + 50}px`;
-                graphicLeft.style.backgroundImage = 'url("C:\Users\shahi\Downloads\vector-13png_1700130200_54679.png")';
-                container.appendChild(graphicLeft);
-
-                const graphicRight = document.createElement('div');
-                graphicRight.classList.add('floating-graphic', 'floating-right');
-                graphicRight.style.top = `${i * 300 + 150}px`;
-                graphicRight.style.backgroundImage = 'url("C:\Users\shahi\Downloads\vector-15png_1700141862_82973.png")';
-                container.appendChild(graphicRight);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', addFloatingGraphics);
     </script>
 </head>
 <body>
     <div class="container">
+        <div class="cloud"></div>
+        <div class="cloud"></div>
+        <div class="cloud"></div>
         <h1>Attachment Style Questionnaire</h1>
         <form onsubmit="calculateScores(event)">
             <div class="question">
-                <p>1. I find it relatively easy to get close to others.</p>
-<br>
+                <p>1. I find it relatively easy to get close to others.</p><br>
                 <div class="option"><input type="radio" id="q1-1" name="q1" value="1"><label for="q1-1">Strongly Disagree</label></div>
                 <div class="option"><input type="radio" id="q1-2" name="q1" value="2"><label for="q1-2">Disagree</label></div>
                 <div class="option"><input type="radio" id="q1-3" name="q1" value="3"><label for="q1-3">Neutral</label></div>
@@ -205,7 +254,7 @@
                 <div class="option"><input type="radio" id="q1-5" name="q1" value="5"><label for="q1-5">Strongly Agree</label></div>
             </div>
             <div class="question">
-                <p>2. I am uncomfortable being close to others.</p> <br>
+                <p>2. I am uncomfortable being close to others.</p><br>
                 <div class="option"><input type="radio" id="q2-1" name="q2" value="1"><label for="q2-1">Strongly Disagree</label></div>
                 <div class="option"><input type="radio" id="q2-2" name="q2" value="2"><label for="q2-2">Disagree</label></div>
                 <div class="option"><input type="radio" id="q2-3" name="q2" value="3"><label for="q2-3">Neutral</label></div>
@@ -213,16 +262,14 @@
                 <div class="option"><input type="radio" id="q2-5" name="q2" value="5"><label for="q2-5">Strongly Agree</label></div>
             </div>
             <div class="question">
-                <p>3. I find that others are reluctant to get as close as I would like.</p><br>
+                <p>3. I find it difficult to trust others completely.</p><br>
                 <div class="option"><input type="radio" id="q3-1" name="q3" value="1"><label for="q3-1">Strongly Disagree</label></div>
-                <div class="option"><input type="radio" id="q3-2" name="q3" value
-
-="2"><label for="q3-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q3-2" name="q3" value="2"><label for="q3-2">Disagree</label></div>
                 <div class="option"><input type="radio" id="q3-3" name="q3" value="3"><label for="q3-3">Neutral</label></div>
                 <div class="option"><input type="radio" id="q3-4" name="q3" value="4"><label for="q3-4">Agree</label></div>
                 <div class="option"><input type="radio" id="q3-5" name="q3" value="5"><label for="q3-5">Strongly Agree</label></div>
             </div>
-            <div class="question">
+ <div class="question">
                 <p>4. I worry about being abandoned.</p><br>
                 <div class="option"><input type="radio" id="q4-1" name="q4" value="1"><label for="q4-1">Strongly Disagree</label></div>
                 <div class="option"><input type="radio" id="q4-2" name="q4" value="2"><label for="q4-2">Disagree</label></div>
@@ -387,75 +434,6 @@
                 <input type="submit" value="Submit">
             </div>
         </form>
-        <div class="results" id="results"></div>
     </div>
-        <script>
-       function calculateResults() {
-    const form = document.getElementById('quizForm');
-    const resultsDiv = document.getElementById('results');
-    const formData = new FormData(form);
-
-    let secureScore = 0;
-    let fearfulScore = 0;
-    let preoccupiedScore = 0;
-    let dismissingScore = 0;
-
-    let unanswered = null;
-
-    // Iterate through each question and check if answered
-    formData.forEach((value, key) => {
-        const questionNumber = parseInt(key.substring(1));
-        const answerValue = parseInt(value);
-
-        if (isNaN(answerValue)) {
-            if (!unanswered) {
-                unanswered = form.querySelector(`[name="${key}"]`).closest('.question');
-            }
-            return;
-        }
-
-        if ([1, 5, 9, 13, 17, 21].includes(questionNumber)) {
-            secureScore += answerValue;
-        } else if ([2, 6, 10, 14, 18, 22].includes(questionNumber)) {
-            fearfulScore += answerValue;
-        } else if ([3, 7, 11, 15, 19].includes(questionNumber)) {
-            preoccupiedScore += answerValue;
-        } else if ([4, 8, 12, 16, 20].includes(questionNumber)) {
-            dismissingScore += answerValue;
-        }
-    });
-
-    // Scroll to the first unanswered question if any
-    if (unanswered) {
-        unanswered.scrollIntoView({ behavior: 'smooth' });
-        return;
-    }
-
-    const results = {
-        secure: secureScore,
-        fearful: fearfulScore,
-        preoccupied: preoccupiedScore,
-        dismissing: dismissingScore
-    };
-
-    // Save results in localStorage
-    localStorage.setItem('attachmentResults', JSON.stringify(results));
-    window.location.href = 'file:///C:/Users/shahi/Downloads/FinalPAge.html';
-}
-
-// Ensure that the images are added to the container
-const myContainer = document.getElementById('myContainer');
-const imageTopRight = document.createElement('img');
-imageTopRight.src = 'image1.png';
-imageTopRight.classList.add('floating-image', 'image-top-right');
-
-const imageBottomLeft = document.createElement('img');
-imageBottomLeft.src = 'image2.png';
-imageBottomLeft.classList.add('floating-image', 'image-bottom-left');
-
-myContainer.appendChild(imageTopRight);
-myContainer.appendChild(imageBottomLeft);
- // (Insert the updated JavaScript code here)
-    </script>
 </body>
 </html>
