@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attachment Style Questionnaire</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF9F3;
+            color: #080A47;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+            .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #FFF9F3;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+
+        h1 {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-size: 2em;
+            text-align: center;
+            color: #080A47;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .question {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .option {
+            display: inline-block;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .option input[type="radio"] {
+            display: none;
+        }
+
+        .option label {
+            font-size: 1em;
+            padding: 10px 20px;
+            border: 2px solid #080A47;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .option input[type="radio"]:checked + label,
+        .option label:hover {
+            background-color: #080A47;
+            color: #FFF9F3;
+            transform: scale(1.05);
+        }
+
+        .submit-container {
+            text-align: center;
+        }
+
+        .submit-container input[type="submit"] {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            color: #FFF9F3;
+            background-color: #080A47;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-container input[type="submit"]:hover {
+            background-color: #080A47;
+            transform: scale(1.05);
+        }
+
+        .results {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .results h2 {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-size: 1.8em;
+            color: #080A47;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .result {
+            margin-bottom: 20px;
+        }
+
+        .result h3 {
+            font-size: 1.4em;
+            color: #080A47;
+        }
+
+        .result p {
+            font-size: 1em;
+        }
+
+        .floating-graphic {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.3;
+            animation: float 5s infinite;
+        }
+
+        .floating-left {
+            left: 0;
+        }
+
+        .floating-right {
+            right: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+    <script>
+        function calculateScores(event) {
+            event.preventDefault();
+            let secure = 0, fearful = 0, preoccupied = 0, dismissing = 0;
+            const form = event.target;
+            const questions = Array.from(form.elements).filter(el => el.type === 'radio' && el.checked);
+            
+            questions.forEach(q => {
+                const value = parseInt(q.value);
+                const name = q.name;
+
+                if (name.match(/q(1|6|8|13|19|20)/)) secure += value;
+                if (name.match(/q(2|5|9|14|17|18)/)) fearful += value;
+                if (name.match(/q(3|4|10|15|21|22)/)) preoccupied += value;
+                if (name.match(/q(7|11|12|16)/)) dismissing += value;
+            });
+
+            document.getElementById('secure-score').textContent = `Score: ${secure}`;
+            document.getElementById('fearful-score').textContent = `Score: ${fearful}`;
+            document.getElementById('preoccupied-score').textContent = `Score: ${preoccupied}`;
+            document.getElementById('dismissing-score').textContent = `Score: ${dismissing}`;
+            document.getElementById('results').style.display = 'block';
+        }
+
+        function addFloatingGraphics() {
+            const container = document.querySelector('.container');
+            const graphicsCount = Math.floor(container.scrollHeight / 300);
+            
+            for (let i = 0; i < graphicsCount; i++) {
+                const graphicLeft = document.createElement('div');
+                graphicLeft.classList.add('floating-graphic', 'floating-left');
+                graphicLeft.style.top = `${i * 300 + 50}px`;
+                graphicLeft.style.backgroundImage = 'url("C:\Users\shahi\Downloads\vector-13png_1700130200_54679.png")';
+                container.appendChild(graphicLeft);
+
+                const graphicRight = document.createElement('div');
+                graphicRight.classList.add('floating-graphic', 'floating-right');
+                graphicRight.style.top = `${i * 300 + 150}px`;
+                graphicRight.style.backgroundImage = 'url("C:\Users\shahi\Downloads\vector-15png_1700141862_82973.png")';
+                container.appendChild(graphicRight);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', addFloatingGraphics);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Attachment Style Questionnaire</h1>
+        <form onsubmit="calculateScores(event)">
+            <div class="question">
+                <p>1. I find it relatively easy to get close to others.</p>
+<br>
+                <div class="option"><input type="radio" id="q1-1" name="q1" value="1"><label for="q1-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q1-2" name="q1" value="2"><label for="q1-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q1-3" name="q1" value="3"><label for="q1-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q1-4" name="q1" value="4"><label for="q1-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q1-5" name="q1" value="5"><label for="q1-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>2. I am uncomfortable being close to others.</p> <br>
+                <div class="option"><input type="radio" id="q2-1" name="q2" value="1"><label for="q2-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q2-2" name="q2" value="2"><label for="q2-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q2-3" name="q2" value="3"><label for="q2-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q2-4" name="q2" value="4"><label for="q2-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q2-5" name="q2" value="5"><label for="q2-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>3. I find that others are reluctant to get as close as I would like.</p><br>
+                <div class="option"><input type="radio" id="q3-1" name="q3" value="1"><label for="q3-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q3-2" name="q3" value
+
+="2"><label for="q3-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q3-3" name="q3" value="3"><label for="q3-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q3-4" name="q3" value="4"><label for="q3-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q3-5" name="q3" value="5"><label for="q3-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>4. I worry about being abandoned.</p><br>
+                <div class="option"><input type="radio" id="q4-1" name="q4" value="1"><label for="q4-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q4-2" name="q4" value="2"><label for="q4-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q4-3" name="q4" value="3"><label for="q4-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q4-4" name="q4" value="4"><label for="q4-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q4-5" name="q4" value="5"><label for="q4-5">Strongly Agree</label></div>
+            </div>
+           
+ <div class="question">
+                <p>5. I often worry that my partner doesn't really love me.</p><br>
+                <div class="option"><input type="radio" id="q5-1" name="q5" value="1"><label for="q5-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q5-2" name="q5" value="2"><label for="q5-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q5-3" name="q5" value="3"><label for="q5-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q5-4" name="q5" value="4"><label for="q5-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q5-5" name="q5" value="5"><label for="q5-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>6. I worry about others getting too close to me.</p>
+<br>
+
+                <div class="option"><input type="radio" id="q6-1" name="q6" value="1"><label for="q6-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q6-2" name="q6" value="2"><label for="q6-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q6-3" name="q6" value="3"><label for="q6-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q6-4" name="q6" value="4"><label for="q6-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q6-5" name="q6" value="5"><label for="q6-5">Strongly Agree</label></div>
+            </div>
+            <!-- Repeat similar blocks for questions 7 to 22 -->
+            <div class="question">
+                <p>7. I find it difficult to trust others completely.</p><br>
+                <div class="option"><input type="radio" id="q7-1" name="q7" value="1"><label for="q7-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q7-2" name="q7" value="2"><label for="q7-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q7-3" name="q7" value="3"><label for="q7-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q7-4" name="q7" value="4"><label for="q7-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q7-5" name="q7" value="5"><label for="q7-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>8. I get nervous when someone gets too close to me.</p><br>
+                <div class="option"><input type="radio" id="q8-1" name="q8" value="1"><label for="q8-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q8-2" name="q8" value="2"><label for="q8-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q8-3" name="q8" value="3"><label for="q8-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q8-4" name="q8" value="4"><label for="q8-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q8-5" name="q8" value="5"><label for="q8-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>9. I worry that I will be hurt if I allow myself to get too close to others.</p><br>
+                <div class="option"><input type="radio" id="q9-1" name="q9" value="1"><label for="q9-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q9-2" name="q9" value="2"><label for="q9-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q9-3" name="q9" value="3"><label for="q9-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q9-4" name="q9" value="4"><label for="q9-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q9-5" name="q9" value="5"><label for="q9-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>10. I find it relatively easy to get close to others.</p><br>
+                <div class="option"><input type="radio" id="q10-1" name="q10" value="1"><label for="q10-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q10-2" name="q10" value="2"><label for="q10-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q10-3" name="q10" value="3"><label for="q10-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q10-4" name="q10" value="4"><label for="q10-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q10-5" name="q10" value="5"><label for="q10-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>11. I am comfortable depending on others and having others depend on me.</p><br>
+                <div class="option"><input type="radio" id="q11-1" name="q11" value="1"><label for="q11-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q11-2" name="q11" value="2"><label for="q11-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q11-3" name="q11" value="3"><label for="q11-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q11-4" name="q11" value="4"><label for="q11-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q11-5" name="q11" value="5"><label for="q11-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>12. I worry about being abandoned.</p><br>
+                <div class="option"><input type="radio" id="q12-1" name="q12" value="1"><label for="q12-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q12-2" name="q12" value="2"><label for="q12-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q12-3" name="q12" value="3"><label for="q12-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q12-4" name="q12" value="4"><label for="q12-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q12-5" name="q12" value="5"><label for="q12-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>13. I worry a lot about my relationships.</p><br>
+                <div class="option"><input type="radio" id="q13-1" name="q13" value="1"><label for="q13-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q13-2" name="q13" value="2"><label for="q13-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q13-3" name="q13" value="3"><label for="q13-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q13-4" name="q13" value="4"><label for="q13-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q13-5" name="q13" value="5"><label for="q13-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>14. I often worry that my partner doesn't really love me.</p><br>
+                <div class="option"><input type="radio" id="q14-1" name="q14" value="1"><label for="q14-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q14-2" name="q14
+
+" value="2"><label for="q14-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q14-3" name="q14" value="3"><label for="q14-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q14-4" name="q14" value="4"><label for="q14-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q14-5" name="q14" value="5"><label for="q14-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>15. I worry about others getting too close to me.</p><br>
+                <div class="option"><input type="radio" id="q15-1" name="q15" value="1"><label for="q15-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q15-2" name="q15" value="2"><label for="q15-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q15-3" name="q15" value="3"><label for="q15-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q15-4" name="q15" value="4"><label for="q15-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q15-5" name="q15" value="5"><label for="q15-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>16. I find it difficult to trust others completely.</p><br>
+                <div class="option"><input type="radio" id="q16-1" name="q16" value="1"><label for="q16-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q16-2" name="q16" value="2"><label for="q16-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q16-3" name="q16" value="3"><label for="q16-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q16-4" name="q16" value="4"><label for="q16-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q16-5" name="q16" value="5"><label for="q16-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>17. I get nervous when someone gets too close to me.</p><br>
+                <div class="option"><input type="radio" id="q17-1" name="q17" value="1"><label for="q17-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q17-2" name="q17" value="2"><label for="q17-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q17-3" name="q17" value="3"><label for="q17-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q17-4" name="q17" value="4"><label for="q17-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q17-5" name="q17" value="5"><label for="q17-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>18. I worry that I will be hurt if I allow myself to get too close to others.</p><br>
+                <div class="option"><input type="radio" id="q18-1" name="q18" value="1"><label for="q18-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q18-2" name="q18" value="2"><label for="q18-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q18-3" name="q18" value="3"><label for="q18-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q18-4" name="q18" value="4"><label for="q18-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q18-5" name="q18" value="5"><label for="q18-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>19. I find it relatively easy to get close to others.</p><br>
+                <div class="option"><input type="radio" id="q19-1" name="q19" value="1"><label for="q19-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q19-2" name="q19" value="2"><label for="q19-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q19-3" name="q19" value="3"><label for="q19-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q19-4" name="q19" value="4"><label for="q19-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q19-5" name="q19" value="5"><label for="q19-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>20. I am comfortable depending on others and having others depend on me.</p><br>
+                <div class="option"><input type="radio" id="q20-1" name="q20" value="1"><label for="q20-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q20-2" name="q20" value="2"><label for="q20-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q20-3" name="q20" value="3"><label for="q20-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q20-4" name="q20" value="4"><label for="q20-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q20-5" name="q20" value="5"><label for="q20-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>21. I worry about being abandoned.</p><br>
+                <div class="option"><input type="radio" id="q21-1" name="q21" value="1"><label for="q21-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q21-2" name="q21" value="2"><label for="q21-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q21-3" name="q21" value="3"><label for="q21-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q21-4" name="q21" value="4"><label for="q21-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q21-5" name="q21" value="5"><label for="q21-5">Strongly Agree</label></div>
+            </div>
+            <div class="question">
+                <p>22. I worry a lot about my relationships.</p><br>
+                <div class="option"><input type="radio" id="q22-1" name="q22" value="1"><label for="q22-1">Strongly Disagree</label></div>
+                <div class="option"><input type="radio" id="q22-2" name="q22" value="2"><label for="q22-2">Disagree</label></div>
+                <div class="option"><input type="radio" id="q22-3" name="q22" value="3"><label for="q22-3">Neutral</label></div>
+                <div class="option"><input type="radio" id="q22-4" name
+
+="q22" value="4"><label for="q22-4">Agree</label></div>
+                <div class="option"><input type="radio" id="q22-5" name="q22" value="5"><label for="q22-5">Strongly Agree</label></div>
+            </div>
+
+            <div class="submit-container">
+                <input type="submit" value="Submit">
+            </div>
+        </form>
+        <div class="results" id="results"></div>
+    </div>
+        <script>
+       function calculateResults() {
+    const form = document.getElementById('quizForm');
+    const resultsDiv = document.getElementById('results');
+    const formData = new FormData(form);
+
+    let secureScore = 0;
+    let fearfulScore = 0;
+    let preoccupiedScore = 0;
+    let dismissingScore = 0;
+
+    let unanswered = null;
+
+    // Iterate through each question and check if answered
+    formData.forEach((value, key) => {
+        const questionNumber = parseInt(key.substring(1));
+        const answerValue = parseInt(value);
+
+        if (isNaN(answerValue)) {
+            if (!unanswered) {
+                unanswered = form.querySelector(`[name="${key}"]`).closest('.question');
+            }
+            return;
+        }
+
+        if ([1, 5, 9, 13, 17, 21].includes(questionNumber)) {
+            secureScore += answerValue;
+        } else if ([2, 6, 10, 14, 18, 22].includes(questionNumber)) {
+            fearfulScore += answerValue;
+        } else if ([3, 7, 11, 15, 19].includes(questionNumber)) {
+            preoccupiedScore += answerValue;
+        } else if ([4, 8, 12, 16, 20].includes(questionNumber)) {
+            dismissingScore += answerValue;
+        }
+    });
+
+    // Scroll to the first unanswered question if any
+    if (unanswered) {
+        unanswered.scrollIntoView({ behavior: 'smooth' });
+        return;
+    }
+
+    const results = {
+        secure: secureScore,
+        fearful: fearfulScore,
+        preoccupied: preoccupiedScore,
+        dismissing: dismissingScore
+    };
+
+    // Save results in localStorage
+    localStorage.setItem('attachmentResults', JSON.stringify(results));
+    window.location.href = 'file:///C:/Users/shahi/Downloads/FinalPAge.html';
+}
+
+// Ensure that the images are added to the container
+const myContainer = document.getElementById('myContainer');
+const imageTopRight = document.createElement('img');
+imageTopRight.src = 'image1.png';
+imageTopRight.classList.add('floating-image', 'image-top-right');
+
+const imageBottomLeft = document.createElement('img');
+imageBottomLeft.src = 'image2.png';
+imageBottomLeft.classList.add('floating-image', 'image-bottom-left');
+
+myContainer.appendChild(imageTopRight);
+myContainer.appendChild(imageBottomLeft);
+ // (Insert the updated JavaScript code here)
+    </script>
+</body>
+</html>
