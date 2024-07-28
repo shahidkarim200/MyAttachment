@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF9F3;
+            color: #080A47;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #FFF9F3;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-size: 2em;
+            text-align: center;
+            color: #080A47;
+        }
+
+        p {
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function displayResults() {
+            const secureMean = parseFloat(localStorage.getItem('secureMean'));
+            const fearfulMean = parseFloat(localStorage.getItem('fearfulMean'));
+            const preoccupiedMean = parseFloat(localStorage.getItem('preoccupiedMean'));
+            const dismissingMean = parseFloat(localStorage.getItem('dismissingMean'));
+
+            let attachmentStyles = [];
+            let highestMean = Math.max(secureMean, fearfulMean, preoccupiedMean, dismissingMean);
+
+            if (secureMean === highestMean) attachmentStyles.push('Secure');
+            if (fearfulMean === highestMean) attachmentStyles.push('Fearful');
+            if (preoccupiedMean === highestMean) attachmentStyles.push('Preoccupied');
+            if (dismissingMean === highestMean) attachmentStyles.push('Dismissing');
+
+            const header = document.createElement('h1');
+            header.textContent = `You are a ${attachmentStyles.join('/')} Person`;
+            document.body.appendChild(header);
+
+            const descriptions = {
+                'Secure': 'A description of secure attachment style.',
+                'Fearful': 'A description of fearful attachment style.',
+                'Preoccupied': 'A description of preoccupied attachment style.',
+                'Dismissing': 'A description of dismissing attachment style.'
+            };
+
+            attachmentStyles.forEach(style => {
+                const paragraph = document.createElement('p');
+                paragraph.textContent = descriptions[style];
+                document.body.appendChild(paragraph);
+            });
+        }
+
+        window.onload = displayResults;
+    </script>
+</head>
+<body>
+    <div class="container">
+    </div>
+</body>
+</html>
