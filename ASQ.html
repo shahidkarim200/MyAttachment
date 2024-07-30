@@ -67,19 +67,14 @@
     }
 
     .options-container {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        align-items: center; /* Center-align options */
-        width: 100%; /* Ensure full width */
-    }
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+}
 
-    .option {
-        display: block;
-        margin: 10px 0;
-        width: 100%;
-        max-width: 300px; /* Limit maximum width */
-    }
+.option {
+    width: 100%;
+}
 
     .option input[type="radio"] {
         display: none;
@@ -244,13 +239,18 @@ li {
 }
 @media (max-width: 768px) {
     body {
-        font-size: 14px;
+        font-size: 16px;
         padding: 10px;
+        overflow-x: hidden;
     }
 
     .header {
-        font-size: 20px;
+        font-size: 22px;
         top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
     }
 
     .container {
@@ -258,81 +258,77 @@ li {
         max-width: none;
         margin: 60px auto 20px;
         padding: 15px;
+        box-sizing: border-box;
     }
 
     h1 {
-        font-size: 1.5em;
+        font-size: 1.8em;
     }
 
     .question p {
-        font-size: 1em;
+        font-size: 1.1em;
     }
 
     .option label {
-        font-size: 0.9em;
-        padding: 8px 10px;
+        font-size: 1em;
+        padding: 10px 15px;
     }
 
     .submit-container input[type="submit"],
     .submit-container button {
-        font-size: 1em;
-        padding: 8px 15px;
+        font-size: 1.1em;
+        padding: 10px 20px;
     }
 
     .floating-image-top {
-        top: -75px;
-        right: -75px;
-        width: 40vw;
-        max-width: 150px;
+        top: -50px;
+        right: -50px;
+        width: 60vw;
+        max-width: 200px;
     }
 
     .floating-image-bottom {
-        bottom: -75px;
-        left: -75px;
-        width: 40vw;
-        max-width: 150px;
+        bottom: -50px;
+        left: -50px;
+        width: 60vw;
+        max-width: 200px;
     }
 }
 
 @media (max-width: 480px) {
     body {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .header {
-        font-size: 18px;
-    }
-
-    .container {
-        width: 100%;
-        padding: 10px;
+        font-size: 20px;
     }
 
     h1 {
-        font-size: 1.3em;
+        font-size: 1.6em;
     }
 
     .question p {
-        font-size: 0.9em;
+        font-size: 1em;
     }
 
     .option label {
-        font-size: 0.8em;
-        padding: 6px 8px;
+        font-size: 0.9em;
+        padding: 8px 12px;
     }
 
     .submit-container input[type="submit"],
     .submit-container button {
-        font-size: 0.9em;
-        padding: 6px 12px;
+        font-size: 1em;
+        padding: 8px 16px;
     }
 
     .floating-image-top,
     .floating-image-bottom {
-        width: 30vw;
-        max-width: 100px;
+        width: 50vw;
+        max-width: 180px;
     }
-}    
+}
 </style>
 </head>
 <body>
