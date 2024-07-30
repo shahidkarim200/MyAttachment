@@ -633,12 +633,12 @@
                 };
                 let shareText = `Hey! I just took this Attachment Style Questionnaire and I am a ${highestStyles.join(' and ')} type. `;
                 shareText += highestStyles.map(style => attachmentDescriptions[style]).join(' ');
-                shareText += " Find out your Attachment Style here: https://myattachment.com";
+                shareText += " Find out your Attachment Style here: https://myattachment.in";
                 if (navigator.share) {
                     navigator.share({
                         title: 'My Attachment Style Results',
                         text: shareText,
-                        url: 'https://myattachment.com',
+                        url: 'https://myattachment.in',
                     })
                     .then(() => console.log('Successful share'))
                     .catch((error) => console.log('Error sharing', error));
