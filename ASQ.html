@@ -487,13 +487,14 @@ document.addEventListener('DOMContentLoaded', function() {
         displayResults(means);
     }
 
-    function displayResults(means) {
-        const results = Object.entries(means).map(([style, score]) => ({ style, score }));
-        results.sort((a, b) => b.score - a.score);
-        const highestScore = results[0].score;
-        const highestStyles = results.filter(r => r.score === highestScore).map(r => r.style);
+   function displayResults(means) {
+    const results = Object.entries(means).map(([style, score]) => ({ style, score }));
+    results.sort((a, b) => b.score - a.score);
+    const highestScore = results[0].score;
+    const highestStyles = results.filter(r => r.score === highestScore).map(r => r.style);
 
-        let resultsHTML = `
+    let resultsHTML = `
+        <div class="results-container">
             <h2>Your Attachment Style Questionnaire Results are:</h2>
             <ul>
                 ${results.map(r => `<li>${r.style}: ${r.score.toFixed(3)}</li>`).join('')}
@@ -501,57 +502,61 @@ document.addEventListener('DOMContentLoaded', function() {
             <p>Your Attachment Style${highestStyles.length > 1 ? 's are' : ' is'}:</p>
             <p><strong>${highestStyles.join(', ')}</strong></p>
             <button id="findOutButton" class="cta-button">Find Out About It</button>
-            <button id="exportButton" class="secondary-button">Export Results</button>
-        `;
+            <button id="shareButton" class="secondary-button">Share</button>
+        </div>
+    `;
 
-        questionContainer.innerHTML = resultsHTML;
+    questionContainer.innerHTML = resultsHTML;
 
-        document.getElementById('findOutButton').addEventListener('click', function() {
-            window.location.href = 'AttachmentStyles.html';
-        });
-
-        document.getElementById('exportButton').addEventListener('click', function() {
-            exportResults(means);
-        });
-
-        prevButton.style.display = 'none';
-        nextButton.style.display = 'none';
-        submitButton.style.display = 'none';
-        progressBar.style.display = 'none';
-
-        // Clear local storage
-        localStorage.removeItem('attachmentAnswers');
-        localStorage.removeItem('currentQuestion');
-    }
-
-    function exportResults(means) {
-        const resultsText = Object.entries(means)
-            .map(([style, score]) => `${style}: ${score.toFixed(3)}`)
-            .join('\n');
-        const blob = new Blob([resultsText], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'attachment_style_results.txt';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-    }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowLeft' && currentQuestion > 0) {
-            prevButton.click();
-        } else if (e.key === 'ArrowRight' && currentQuestion < questions.length - 1) {
-            nextButton.click();
-        }
+    document.getElementById('findOutButton').addEventListener('click', function() {
+        window.location.href = 'AttachmentStyles.html';
     });
 
-    // Initialize the first question or resume from saved progress
-    currentQuestion = parseInt(localStorage.getItem('currentQuestion')) || 0;
-    showQuestion(currentQuestion);
-});
+    document.getElementById('shareButton').addEventListener('click', function() {
+        shareResults(highestStyles);
+    });
+
+    prevButton.style.display = 'none';
+    nextButton.style.display = 'none';
+    submitButton.style.display = 'none';
+    progressBar.style.display = 'none';
+
+    // Clear local storage
+    localStorage.removeItem('attachmentAnswers');
+    localStorage.removeItem('currentQuestion');
+}
+
+function shareResults(highestStyles) {
+    const attachmentDescriptions = {
+        Secure: "People with a secure attachment style tend to feel comfortable with intimacy and are usually warm and loving.",
+        Fearful: "Those with a fearful attachment style may struggle with intimacy and have conflicting desires for closeness and distance.",
+        Preoccupied: "Individuals with a preoccupied attachment style often seek high levels of intimacy, approval, and responsiveness from their partners.",
+        Dismissing: "People with a dismissing attachment style tend to be emotionally distant and value independence over close relationships."
+    };
+
+    let shareText = `Hey! I just took this Attachment Style Questionnaire and I am a ${highestStyles.join(' and ')} type. `;
+    shareText += highestStyles.map(style => attachmentDescriptions[style]).join(' ');
+    shareText += " Find out your Attachment Style here: https://myattachment.com";
+
+    if (navigator.share) {
+        navigator.share({
+            title: 'My Attachment Style Results',
+            text: shareText,
+            url: 'https://myattachment.com',
+        })
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    } else {
+        // Fallback for browsers that don't support the Web Share API
+        const dummyTextArea = document.createElement('textarea');
+        dummyTextArea.value = shareText;
+        document.body.appendChild(dummyTextArea);
+        dummyTextArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(dummyTextArea);
+        alert('Share text copied to clipboard! You can now paste it wherever you want to share.');
+    }
+}
 </script>
 </body>
 </html>
