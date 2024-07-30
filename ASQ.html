@@ -591,49 +591,42 @@
                     Dismissing: counts.D > 0 ? scores.D / counts.D : 0
                 };
 
-                displayResults(means);
-            }
+              function displayResults(means) {
+    const results = Object.entries(means).map(([style, score]) => ({ style, score }));
+    results.sort((a, b) => b.score - a.score);
+    const highestScore = results[0].score;
+    const highestStyles = results.filter(r => r.score === highestScore).map(r => r.style);
 
-            function displayResults(means) {
-                const results = Object.entries(means).map(([style, score]) => ({ style, score }));
-                results.sort((a, b) => b.score - a.score);
-                const highestScore = results[0].score;
-                const highestStyles = results.filter(r => r.score === highestScore).map(r => r.style);
+    let resultsHTML = `
+        <div class="results-container">
+            <h2>Your Attachment Style Questionnaire Results are:</h2>
+            <ul>
+                ${results.map(r => `<li><span>${r.style}:</span> <span>${r.score.toFixed(3)}</span></li>`).join('')}
+            </ul>
+            <p>Your Attachment Style${highestStyles.length > 1 ? 's are' : ' is'}:</p>
+            <p><strong>${highestStyles.join(', ')}</strong></p>
+            <div class="button-container">
+                <button id="findOutButton" class="cta-button">Find Out About It</button>
+                <button id="shareButton" class="secondary-button">Share</button>
+            </div>
+        </div>
+    `;
 
-                let resultsHTML = `
-                    <div class="results-container">
-                        <h2>Your Attachment Style Questionnaire Results are:</h2>
-                        <ul>
-                            ${results.map(r => `<li><span>${r.style}:</span> <span>${r.score.toFixed(3)}</span></li>`).join('')}
-                        </ul>
-                        <p>Your Attachment Style${highestStyles.length > 1 ? 's are' : ' is'}:</p>
-                        <p><strong>${highestStyles.join(', ')}</strong></p>
-                        <div class="button-container">
-                            <button id="findOutButton" class="cta-button">Find Out About It</button>
-                            <button id="shareButton" class="secondary-button">Share</button>
-                        </div>
-                    </div>
-                `;
+    questionContainer.innerHTML = resultsHTML;
 
-                questionContainer.innerHTML = resultsHTML;
+               
+    document.getElementById('shareButton').addEventListener('click', function() {
+        shareResults(highestStyles);
+    });
 
-                document.getElementById('findOutButton').addEventListener('click', function() {
-    window.location.href = "AttachmentStyles.html";
-});
-                
+    prevButton.style.display = 'none';
+    nextButton.style.display = 'none';
+    submitButton.style.display = 'none';
+    progressBar.style.display = 'none';
 
-                document.getElementById('shareButton').addEventListener('click', function() {
-                    shareResults(highestStyles);
-                });
-
-                prevButton.style.display = 'none';
-                nextButton.style.display = 'none';
-                submitButton.style.display = 'none';
-                progressBar.style.display = 'none';
-
-                localStorage.removeItem('attachmentAnswers');
-                localStorage.removeItem('currentQuestion');
-            }
+    localStorage.removeItem('attachmentAnswers');
+    localStorage.removeItem('currentQuestion');
+}
 
             function shareResults(highestStyles) {
                 const attachmentDescriptions = {
