@@ -591,7 +591,7 @@
                     Dismissing: counts.D > 0 ? scores.D / counts.D : 0
                 };
 
-              function displayResults(means) {
+           function displayResults(means) {
     const results = Object.entries(means).map(([style, score]) => ({ style, score }));
     results.sort((a, b) => b.score - a.score);
     const highestScore = results[0].score;
@@ -614,7 +614,35 @@
 
     questionContainer.innerHTML = resultsHTML;
 
-               
+ const questions = [
+              { text: "I feel at ease in emotional relationships", style: "S" },
+        { text: "I would like to be open to others but I feel that I can't trust other people", style: "F" },
+        { text: "I feel uncomfortable when relationships with other people become close", style: "S", reverse: true },
+        { text: "I would like to have close relationships with other people but I find it difficult to fully trust them", style: "F" },
+        { text: "I prefer that others are independent of me and I am independent of them", style: "D" },
+        { text: "I often wonder whether people like me", style: "P" },
+        { text: "I avoid close ties", style: "S", reverse: true },
+        { text: "I have the impression that usually I like others better than they like me", style: "P" },
+        { text: "I trust other people and I like it when other people can rely on me", style: "S" },
+        { text: "I am often afraid that other people don't like me", style: "P" },
+        { text: "It is important to me to be independent", style: "D" },
+        { text: "I find it easy to get engaged in close relationships with other people", style: "S" },
+        { text: "I feel at ease in intimate relationships", style: "S" },
+        { text: "I like to be self-sufficient", style: "D" },
+        { text: "I don't worry whether people like me or not", style: "P" },
+        { text: "I think it is important that people can rely on each other", style: "S" },
+        { text: "I don't worry about being alone: I don't need other people that strongly", style: "D" },
+        { text: "I am afraid that I will be deceived when I get too close with others", style: "F" },
+        { text: "I usually find other people more interesting than myself", style: "P" },
+        { text: "I trust that others will be there for me when I need them", style: "S" },
+        { text: "I am wary to get engaged in close relationships because I am afraid to get hurt", style: "F" },
+        { text: "It is important to me to know if others like me", style: "P" }
+            ];
+
+    document.getElementById('findOutButton').addEventListener('click', function() {
+        window.location.href = "AttachmentStyles.html";
+    });
+
     document.getElementById('shareButton').addEventListener('click', function() {
         shareResults(highestStyles);
     });
@@ -627,7 +655,6 @@
     localStorage.removeItem('attachmentAnswers');
     localStorage.removeItem('currentQuestion');
 }
-
             function shareResults(highestStyles) {
                 const attachmentDescriptions = {
                     Secure: "People with a secure attachment style tend to feel comfortable with intimacy and are usually warm and loving.",
