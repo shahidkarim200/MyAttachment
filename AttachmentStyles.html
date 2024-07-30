@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <title>The Attachment Styles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&family=Inter:wght@400;700;900&display=swap');
+
+        body {
+            background-color: #FFF9F3;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #080A47;
+            line-height: 1.6;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: rgba(255, 249, 243, 0.9);
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .header .title {
+            font-size: 24px;
+            font-weight: 900;
+            color: #080A47;
+            position: absolute;
+            left: 23%;
+            transform: translateX(-50%);
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: 80px auto 40px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-size: 2.5em;
+            text-align: center;
+            color: #080A47;
+            margin-bottom: 40px;
+        }
+
+        .attachment-style {
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .attachment-style h2 {
+            font-size: 2em;
+            color: #3A30BA;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3A30BA;
+            padding-bottom: 10px;
+        }
+
+        .attachment-style p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+
+        .floating-image {
+            position: absolute;
+            width: 200px;
+            height: auto;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .floating-image-left {
+            left: -220px;
+        }
+
+        .floating-image-right {
+            right: -220px;
+        }
+
+        @media (max-width: 768px) {
+            .header .title {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .container {
+                width: 95%;
+                margin-top: 60px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .attachment-style h2 {
+                font-size: 1.8em;
+            }
+
+            .attachment-style p {
+                font-size: 1em;
+            }
+
+            .floating-image {
+                width: 150px;
+            }
+
+            .floating-image-left {
+                left: -160px;
+            }
+
+            .floating-image-right {
+                right: -160px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header .title {
+                font-size: 20px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .attachment-style h2 {
+                font-size: 1.6em;
+            }
+
+            .floating-image {
+                width: 100px;
+            }
+
+            .floating-image-left {
+                left: -110px;
+            }
+
+            .floating-image-right {
+                right: -110px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header"><div class="title">MyAttachment</div></div>
+    <div class="container">
+        <h1>The Attachment Styles</h1>
+
+        <div class="attachment-style">
+        <h2>Secure Attachment</h2>    
+            <p>[Securely attached adults tend to hold positive self-images and positive images of others, meaning that they have both a sense of worthiness and an expectation that other people are generally accepting and responsive.
+<br>
+<br>
+<h3>As Children:</h3>
+Secure attachment occurs because the mother meets the emotional needs of the infant.
+<br>
+<br>
+Children with a secure attachment use their mother as a safe base to explore their environment. They are moderately distressed when their mother leaves the room (separation anxiety) and seek contact with their mother when she returns.
+<br>
+<br>
+They also show moderate stranger anxiety; they show some distress when approached by a stranger.
+<br>
+<br>
+<h3>As Adults: </h3>
+Adults who demonstrate a secure attachment style value relationships and affirm the impact of relationships on their personalities.
+<br>
+<br>
+They display a readiness to recall and discuss attachments that suggest much reflection regarding previous relationships.
+<br>
+<br>
+Secure adults display openness regarding expressing emotions and thoughts with others and are comfortable with depending on others for help while also being comfortable with others depending on them (Cassidy, 1994).
+<br>
+<br>
+Notably, many secure adults may, in fact, experience negative attachment-related events, yet they can objectively assess people and events and assign a positive value to relationships in general.
+<br>
+<br>
+Secure lovers characterized their most important romantic relationships as happy and trusting. They can support their partners despite the partners’ faults.
+<br>
+<br>
+Their relationships also tend to last longer. Secure lovers believe that although romantic feelings may wax and wane, romantic love will never fade.
+<br>
+<br>
+Through the statistical analysis, secure lovers were found to have had warmer relationships with their parents during childhood.</h2>]</p>
+            <img src="C:\Users\shahi\Downloads\vector-13png_1700130200_54679.png" alt="Secure Attachment" class="floating-image floating-image-right">
+        </div>
+
+        <div class="attachment-style">
+            <h2>Preoccupied Attachment</h2>
+            <p>[Individuals with a preoccupied attachment (called anxious when referring to children) hold a negative self-image and a positive image of others, meaning that they have a sense of unworthiness but generally evaluate others positively.
+<br>
+<br>
+
+As such, they strive for self-acceptance by attempting to gain approval and validation from their relationships with significant others. They also require higher levels of contact and intimacy in relationships with others.
+<br>
+<br>
+<h3>As Children:</h3>
+Children with this type of attachment are clingy to their mother in a new situation and are not willing to explore – suggesting that they do not have trust in her.
+<br>
+<br>
+
+They are extremely distressed when separated from their mother. When the mother returns, they are pleased to see her and go to her for comfort, but they cannot be comforted and may show signs of anger towards her.
+<br>
+<br>
+
+This type of attachment style occurs because the mother sometimes meets the infant’s needs and sometimes ignores their emotional needs, i.e., the mother’s behavior is inconsistent.
+<br>
+<br>
+
+<h3>As Adults:</h3>
+Such individuals crave intimacy but remain anxious about whether other romantic partners will meet their emotional needs. Autonomy and independence can make them feel anxious.
+<br>
+<br>
+
+Additionally, they are preoccupied with dependency on their own parents and still actively struggle to please them.
+<br>
+<br>
+
+In addition, they can become distressed should they interpret recognition and value from others as being insincere or failing to meet an appropriate level of responsiveness.
+<br>
+<br>
+
+Their attachment system is prone to hyperactivation during times of stress, emotions can become amplified, and overdependence on others is increased (Mikulincer & Shaver, 2003).
+<br>
+<br>
+
+Preoccupied lovers characterize their most important romantic relationships by obsession, desire for reciprocation and union, emotional highs and lows, and extreme sexual attraction and jealousy.
+<br>
+<br>
+
+Preoccupied lovers often believe that it is easy for them to fall in love, yet they also claim that unfading love is difficult to find.
+<br>
+<br>
+
+Compared with secure lovers, preoccupied lovers report colder relationships with their parents during childhood.
+<br>
+<br>
+
+Anxious attachment is also known as insecure resistant or anxious ambivalent.]</p>
+            <img src="C:\Users\shahi\Downloads\vector-15png_1700141862_82973.png" alt="Anxious Attachment" class="floating-image floating-image-left">
+        </div>
+
+        <div class="attachment-style">
+            <h2>Dismissing Attachment</h2>
+            <p>[Dismissive attachment style is demonstrated by adults with a positive self-image and a negative image of others. Their internal working model is based on an avoidant attachment established during infancy.
+<br>
+<br>
+
+<h3>As Children:</h3>
+Children with an avoidant attachment do not use the mother as a safe base; they are not distressed on separation from their caregiver and are not joyful when the mother returns. They show little stranger anxiety.
+<br>
+<br>
+
+This type of attachment occurs because the mother ignores the emotional needs of the infant.
+<br>
+<br>
+
+<h3>As Adults:</h3>
+They prefer to avoid close relationships and intimacy with others to maintain a sense of independence and invulnerability. This means they struggle with intimacy and value autonomy and self-reliance (Cassidy, 1994).
+<br>
+<br>
+
+Dismissive-avoidant adults deny experiencing distress associated with relationships and downplay the importance of attachment in general, viewing other people as untrustworthy.
+<br>
+<br>
+
+According to Dr. Julie Smith, a clinical psychologist, these are the signs of an avoidant attachment style in adult relationships:
+<br>
+<br>
+
+When your partner seeks intimacy with you, the barriers go up. The more they try to get close, the more you pull back.
+You hold back on starting new relationships because trusting people is so hard.
+You sometimes end relationships to gain a sense of freedom.
+You keep your partner at arm’s length emotionally because it feels safer, but they often accuse you of being distant.
+Dismissive lovers are characterized by fear of intimacy, emotional highs and lows, and jealousy. They are often unsure of their feelings toward their romantic partner, believing that romantic love can rarely last and that it is hard for them to fall in love (Hazan & Shaver, 1987).
+<br>
+<br>
+
+Proximity seeking is appraised as unlikely to alleviate distress resulting in deliberate deactivation of the attachment system, inhibition of the quest for support, and commitment to handling distress alone, especially distress arising from the failure of the attachment figure to be available and responsive (Mikulincer & Shaver, 2003).
+<br>
+<br>
+
+Dismissive individuals have learned to suppress their emotions at the behavioral level, although they still experience emotional arousal internally (Mikulincer & Shaver, 2005).
+<br>
+<br>
+
+This has negative outcomes in terms of cutting themselves off strong feelings, whether their own or others, thus influencing their experiences of romantic relationships.]</p>
+            <img src="C:\Users\shahi\Downloads\vector-14png_1700131133_65100.png" alt="Avoidant Attachment" class="floating-image floating-image-right">
+        </div>
+
+        <div class="attachment-style">
+            <h2>Fearful Attachment</h2>
+            <p>[Adults with a fearful-avoidant attachment style (also referred to as disorganized) hold a negative model of self and also a negative model of others, fearing both intimacy and autonomy.
+<br>
+<br>
+
+<h3>As Children:</h3>
+They display attachment behaviors typical of avoidant children, becoming socially withdrawn and untrusting of others.
+<br>
+<br>
+
+The behavior of a fearful-avoidant child is very disorganized, hence why it is also known as disorganized attachment.
+<br>
+<br>
+
+If the child and caregiver were to be separated for any amount of time, on the reunion, the child would act conflicted. They may initially run towards their caregiver but then seem to change their mind and either run away or act out.
+<br>
+<br>
+
+In the eyes of a child with a fearful avoidant attachment, their caregivers are untrustworthy.
+<br>
+<br>
+
+Children with a fearful avoidant attachment are at risk of carrying these behaviors into adulthood if they do not receive support to overcome this. They may struggle to feel secure in any relationship if they do not get help for their attachment style.
+<br>
+<br>
+
+<h3>As Adults:</h3>
+“Like dismissing avoidant, they often cope with distancing themselves from relationship partners, but unlike dismissing individuals, they continue to experience anxiety and neediness concerning their partner’s love, reliability, and trustworthiness” (Schachner, Shaver & Mikulincer, 2003, p. 248).
+<br>
+<br>
+
+A fearful avoidant prefers casual relationships and may stay in the dating stage of the relationship for a prolonged period as this feels more comfortable for them.
+<br>
+<br>
+
+This is not always because they want to, but because they fear getting closer to someone.
+<br>
+<br>
+
+A study found that those with a fearful avoidant attachment style are likely to have more sexual partners and higher sexual compliance than other attachment styles (Favez & Tissot, 2019).
+<br>
+<br>
+
+They may prefer to have more sexual partners as a way to get physically close to someone without having to also be emotionally vulnerable to them – thus meeting their need for closeness.
+<br>
+<br>
+
+They could also be more sexually compliant due to having poorer boundaries and learning in childhood that their boundaries do not matter. It is important to remember that this is not the case for all fearful avoidants.
+<br>
+<br>
+
+A partner with this attachment style may prefer to keep their partner at a distance so that things do not get too emotionally intense.
+<br>
+<br>
+
+They may be reluctant to share too much of themselves to protect themselves from eventual hurt. If the relationship gets too deep or they are asked to share personal stories, the fearful-avoidant may shut down rapidly.
+<br>
+<br>
+
+It is common for those with a fearful attachment style to have grown up in a household that is very chaotic and toxic. As such, the fearful-avoidant may expect that their romantic relationships as adults should also be chaotic.
+<br>
+<br>
+
+If they are in a relationship with someone secure and calm, they may be suspicious of why this is. They may believe something must be wrong and may challenge their partner or create a problem to make the relationship more unsettled but familiar to them.
+<br>
+<br>
+
+They tend to always expect something bad to happen in their relationship and will likely find any reason to damage the relationship so they do not get hurt.
+<br>
+<br>
+
+They may blame or accuse their partner of things they have not done, threaten to leave the relationship, or test their partner to see if this makes them jealous. All these strategies may cause their partner to consider ending the relationship.]</p>
+            <img src="C:\Users\shahi\Downloads\vector-15png_1700141862_82973.png" alt="Fearful-Avoidant Attachment" class="floating-image floating-image-left">
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to randomize image positions
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingImages = document.querySelectorAll('.floating-image');
+            floatingImages.forEach(img => {
+                const randomOffset = Math.floor(Math.random() * 200) - 100; // Random offset between -100px and 100px
+                img.style.top = `${randomOffset}px`;
+            });
+        });
+    </script>
+</body>
+</html>
