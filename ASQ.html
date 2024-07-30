@@ -40,7 +40,7 @@
             font-weight: 900;
             color: #080A47;
             position: absolute;
-            left: 25%;
+            left: 23%;
             transform: translateX(-50%);
         }
 
@@ -131,9 +131,8 @@
         .submit-container {
             text-align: center;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             gap: 20px;
-            flex-wrap: wrap;
             margin-top: 20px;
         }
 
@@ -161,9 +160,9 @@
         }
 
         .secondary-button {
-            background-color: #f0f0f0;
-            color: #333;
-            border: 1px solid #ccc;
+            background-color: transparent;
+            color: #080A47;
+            border: 2px solid #080A47;
         }
 
         #progressBar {
@@ -298,8 +297,8 @@
                 padding: 8px 12px;
             }
             .submit-container {
-                flex-direction: column;
-                align-items: center;
+                flex-direction: row;
+                justify-content: space-between;
             }
             .submit-container input[type="submit"],
             .submit-container button,
@@ -383,27 +382,27 @@
             <div id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="width: 0%;"></div>
             <div id="questionContainer"></div>
             <div class="submit-container">
-                <button type="button" id="prevButton" aria-label="Previous question">Previous</button>
+                <button type="button" id="prevButton" class="secondary-button" aria-label="Previous question">Previous</button>
                 <button type="button" id="nextButton" aria-label="Next question">Next</button>
                 <button type="submit" id="submitButton" style="display:none;">Submit</button>
             </div>
         </form>
     </div>
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('attachmentForm');
-    const questionContainer = document.getElementById('questionContainer');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    const submitButton = document.getElementById('submitButton');
-    const progressBar = document.getElementById('progressBar');
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('attachmentForm');
+            const questionContainer = document.getElementById('questionContainer');
+            const prevButton = document.getElementById('prevButton');
+            const nextButton = document.getElementById('nextButton');
+            const submitButton = document.getElementById('submitButton');
+            const progressBar = document.getElementById('progressBar');
 
-    let currentQuestion = 0;
-    let answers = JSON.parse(localStorage.getItem('attachmentAnswers')) || [];
+            let currentQuestion = 0;
+            let answers = JSON.parse(localStorage.getItem('attachmentAnswers')) || [];
 
-    // Questions array should be placed here
-     const questions = [
-           { text: "I feel at ease in emotional relationships", style: "S" },
+            // Questions array
+            const questions = [
+              { text: "I feel at ease in emotional relationships", style: "S" },
         { text: "I would like to be open to others but I feel that I can't trust other people", style: "F" },
         { text: "I feel uncomfortable when relationships with other people become close", style: "S", reverse: true },
         { text: "I would like to have close relationships with other people but I find it difficult to fully trust them", style: "F" },
@@ -425,192 +424,191 @@ document.addEventListener('DOMContentLoaded', function() {
         { text: "I trust that others will be there for me when I need them", style: "S" },
         { text: "I am wary to get engaged in close relationships because I am afraid to get hurt", style: "F" },
         { text: "It is important to me to know if others like me", style: "P" }
-     ];
+            ];
 
-   function showQuestion(index) {
-    const question = questions[index];
-    questionContainer.innerHTML = `
-        <div class="question" aria-live="polite">
-            <p id="questionText">${index + 1}. ${question.text}</p>
-            <div class="options-container" role="radiogroup" aria-labelledby="questionText">
-                ${['Strongly Agree', 'Agree', 'Neutral', 'Disagree', 'Strongly Disagree'].map((option, i) => `
-                    <div class="option">
-                        <input type="radio" id="q${index}-${i}" name="q${index}" value="${5 - i}" required 
-                            ${answers[index] === 5 - i ? 'checked' : ''}>
-                        <label for="q${index}-${i}">${option}</label>
+            function showQuestion(index) {
+                const question = questions[index];
+                questionContainer.innerHTML = `
+                    <div class="question" aria-live="polite">
+                        <p id="questionText">${index + 1}. ${question.text}</p>
+                        <div class="options-container" role="radiogroup" aria-labelledby="questionText">
+                            ${['Strongly Agree', 'Agree', 'Neutral', 'Disagree', 'Strongly Disagree'].map((option, i) => `
+                                <div class="option">
+                                    <input type="radio" id="q${index}-${i}" name="q${index}" value="${5 - i}" required 
+                                        ${answers[index] === 5 - i ? 'checked' : ''}>
+                                    <label for="q${index}-${i}">${option}</label>
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
-                `).join('')}
-            </div>
-        </div>
-    `;
-    updateProgressBar();
-    updateButtonVisibility();
+                `;
+                updateProgressBar();
+                updateButtonVisibility();
 
-    questionContainer.style.opacity = 0;
-    setTimeout(() => {
-        questionContainer.style.opacity = 1;
-    }, 50);
-}
+                questionContainer.style.opacity = 0;
+                setTimeout(() => {
+                    questionContainer.style.opacity = 1;
+                }, 50);
+            }
 
-function updateButtonVisibility() {
-    prevButton.style.display = currentQuestion === 0 ? 'none' : 'inline-block';
-    nextButton.style.display = 'inline-block'; // Always show the Next button
-    submitButton.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
-}
+            function updateButtonVisibility() {
+                prevButton.style.display = currentQuestion === 0 ? 'none' : 'inline-block';
+                nextButton.style.display = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
+                submitButton.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
 
-    function updateProgressBar() {
-        const progress = ((currentQuestion + 1) / questions.length) * 100;
-        progressBar.style.width = `${progress}%`;
-        progressBar.setAttribute('aria-valuenow', progress);
-    }
+                if (currentQuestion === 0) {
+                    nextButton.style.margin = '0 auto';
+                } else {
+                    nextButton.style.margin = '0';
+                }
+            }
 
-    function updateButtonVisibility() {
-        prevButton.style.display = currentQuestion === 0 ? 'none' : 'inline-block';
-        nextButton.style.display = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
-        submitButton.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
-    }
+            function updateProgressBar() {
+                const progress = ((currentQuestion + 1) / questions.length) * 100;
+                progressBar.style.setProperty('--progress', `${progress}%`);
+                progressBar.setAttribute('aria-valuenow', progress);
+            }
 
-    function saveProgress() {
-        localStorage.setItem('attachmentAnswers', JSON.stringify(answers));
-        localStorage.setItem('currentQuestion', currentQuestion);
-    }
+            function saveProgress() {
+                localStorage.setItem('attachmentAnswers', JSON.stringify(answers));
+                localStorage.setItem('currentQuestion', currentQuestion);
+            }
 
-    prevButton.addEventListener('click', () => {
-        if (currentQuestion > 0) {
-            currentQuestion--;
+            prevButton.addEventListener('click', () => {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                }
+            });
+
+            nextButton.addEventListener('click', () => {
+                const selectedOption = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+                if (selectedOption) {
+                    answers[currentQuestion] = parseInt(selectedOption.value);
+                    saveProgress();
+                    if (currentQuestion < questions.length - 1) {
+                        currentQuestion++;
+                        showQuestion(currentQuestion);
+                    }
+                }
+   else {
+                    alert('Please answer the current question before proceeding.');
+                }
+            });
+
+            submitButton.addEventListener('click', function(event) {
+                event.preventDefault();
+                const selectedOption = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+                if (selectedOption) {
+                    answers[currentQuestion] = parseInt(selectedOption.value);
+                    if (answers.length === questions.length) {
+                        calculateScores();
+                    } else {
+                        alert('Please answer all questions before submitting.');
+                    }
+                } else {
+                    alert('Please answer the current question before submitting.');
+                }
+            });
+
+            function calculateScores() {
+                let scores = { S: 0, F: 0, P: 0, D: 0 };
+                let counts = { S: 0, F: 0, P: 0, D: 0 };
+
+                questions.forEach((question, index) => {
+                    let value = answers[index];
+                    if (question.reverse) {
+                        value = 6 - value;
+                    }
+                    scores[question.style] += value;
+                    counts[question.style]++;
+                });
+
+                const means = {
+                    Secure: counts.S > 0 ? scores.S / counts.S : 0,
+                    Fearful: counts.F > 0 ? scores.F / counts.F : 0,
+                    Preoccupied: counts.P > 0 ? scores.P / counts.P : 0,
+                    Dismissing: counts.D > 0 ? scores.D / counts.D : 0
+                };
+
+                displayResults(means);
+            }
+
+            function displayResults(means) {
+                const results = Object.entries(means).map(([style, score]) => ({ style, score }));
+                results.sort((a, b) => b.score - a.score);
+                const highestScore = results[0].score;
+                const highestStyles = results.filter(r => r.score === highestScore).map(r => r.style);
+
+                let resultsHTML = `
+                    <div class="results-container">
+                        <h2>Your Attachment Style Questionnaire Results are:</h2>
+                        <ul>
+                            ${results.map(r => `<li><span>${r.style}:</span> <span>${r.score.toFixed(3)}</span></li>`).join('')}
+                        </ul>
+                        <p>Your Attachment Style${highestStyles.length > 1 ? 's are' : ' is'}:</p>
+                        <p><strong>${highestStyles.join(', ')}</strong></p>
+                        <div class="button-container">
+                            <button id="findOutButton" class="cta-button">Find Out About It</button>
+                            <button id="shareButton" class="secondary-button">Share</button>
+                        </div>
+                    </div>
+                `;
+
+                questionContainer.innerHTML = resultsHTML;
+
+                document.getElementById('findOutButton').addEventListener('click', function() {
+                    window.location.href = 'AttachmentStyles.html';
+                });
+
+                document.getElementById('shareButton').addEventListener('click', function() {
+                    shareResults(highestStyles);
+                });
+
+                prevButton.style.display = 'none';
+                nextButton.style.display = 'none';
+                submitButton.style.display = 'none';
+                progressBar.style.display = 'none';
+
+                localStorage.removeItem('attachmentAnswers');
+                localStorage.removeItem('currentQuestion');
+            }
+
+            function shareResults(highestStyles) {
+                const attachmentDescriptions = {
+                    Secure: "People with a secure attachment style tend to feel comfortable with intimacy and are usually warm and loving.",
+                    Fearful: "Those with a fearful attachment style may struggle with intimacy and have conflicting desires for closeness and distance.",
+                    Preoccupied: "Individuals with a preoccupied attachment style often seek high levels of intimacy, approval, and responsiveness from their partners.",
+                    Dismissing: "People with a dismissing attachment style tend to be emotionally distant and value independence over close relationships."
+                };
+
+                let shareText = `Hey! I just took this Attachment Style Questionnaire and I am a ${highestStyles.join(' and ')} type. `;
+                shareText += highestStyles.map(style => attachmentDescriptions[style]).join(' ');
+                shareText += " Find out your Attachment Style here: https://myattachment.com";
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'My Attachment Style Results',
+                        text: shareText,
+                        url: 'https://myattachment.com',
+                    })
+                    .then(() => console.log('Successful share'))
+                    .catch((error) => console.log('Error sharing', error));
+                } else {
+                    const dummyTextArea = document.createElement('textarea');
+                    dummyTextArea.value = shareText;
+                    document.body.appendChild(dummyTextArea);
+                    dummyTextArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(dummyTextArea);
+                    alert('Share text copied to clipboard! You can now paste it wherever you want to share.');
+                }
+            }
+
+            // Initialize the first question or resume from saved progress
+            currentQuestion = parseInt(localStorage.getItem('currentQuestion')) || 0;
             showQuestion(currentQuestion);
-        }
-    });
-
-    nextButton.addEventListener('click', () => {
-        const selectedOption = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
-        if (selectedOption) {
-            answers[currentQuestion] = parseInt(selectedOption.value);
-            saveProgress();
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                showQuestion(currentQuestion);
-            }
-        } else {
-            alert('Please answer the current question before proceeding.');
-        }
-    });
-
-    submitButton.addEventListener('click', function(event) {
-        event.preventDefault();
-        const selectedOption = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
-        if (selectedOption) {
-            answers[currentQuestion] = parseInt(selectedOption.value);
-            if (answers.length === questions.length) {
-                calculateScores();
-            } else {
-                alert('Please answer all questions before submitting.');
-            }
-        } else {
-            alert('Please answer the current question before submitting.');
-        }
-    });
-
-    function calculateScores() {
-        let scores = { S: 0, F: 0, P: 0, D: 0 };
-        let counts = { S: 0, F: 0, P: 0, D: 0 };
-
-        questions.forEach((question, index) => {
-            let value = answers[index];
-            if (question.reverse) {
-                value = 6 - value;
-            }
-            scores[question.style] += value;
-            counts[question.style]++;
         });
-
-        const means = {
-            Secure: counts.S > 0 ? scores.S / counts.S : 0,
-            Fearful: counts.F > 0 ? scores.F / counts.F : 0,
-            Preoccupied: counts.P > 0 ? scores.P / counts.P : 0,
-            Dismissing: counts.D > 0 ? scores.D / counts.D : 0
-        };
-
-        displayResults(means);
-    }
-
-  
-        function displayResults(means) {
-            const results = Object.entries(means).map(([style, score]) => ({ style, score }));
-            results.sort((a, b) => b.score - a.score);
-            const highestScore = results[0].score;
-            const highestStyles = results.filter(r => r.score === highestScore).map(r => r.style);
-
-            let resultsHTML = `
-                <div class="results-container">
-                    <h2>Your Attachment Style Questionnaire Results are:</h2>
-                    <ul>
-                        ${results.map(r => `<li>${r.style}: ${r.score.toFixed(3)}</li>`).join('')}
-                    </ul>
-                    <p>Your Attachment Style${highestStyles.length > 1 ? 's are' : ' is'}:</p>
-                    <p><strong>${highestStyles.join(', ')}</strong></p>
-                    <div class="button-container">
-                        <button id="findOutButton" class="cta-button">Find Out About It</button>
-                        <button id="shareButton" class="secondary-button">Share</button>
-                    </div>
-                </div>
-            `;
-
-            questionContainer.innerHTML = resultsHTML;
-
-            document.getElementById('findOutButton').addEventListener('click', function() {
-                window.location.href = 'AttachmentStyles.html';
-            });
-
-            document.getElementById('shareButton').addEventListener('click', function() {
-                shareResults(highestStyles);
-            });
-
-            prevButton.style.display = 'none';
-            nextButton.style.display = 'none';
-            submitButton.style.display = 'none';
-            progressBar.style.display = 'none';
-
-            localStorage.removeItem('attachmentAnswers');
-            localStorage.removeItem('currentQuestion');
-        
-    }
-
-    function shareResults(highestStyles) {
-        const attachmentDescriptions = {
-            Secure: "People with a secure attachment style tend to feel comfortable with intimacy and are usually warm and loving.",
-            Fearful: "Those with a fearful attachment style may struggle with intimacy and have conflicting desires for closeness and distance.",
-            Preoccupied: "Individuals with a preoccupied attachment style often seek high levels of intimacy, approval, and responsiveness from their partners.",
-            Dismissing: "People with a dismissing attachment style tend to be emotionally distant and value independence over close relationships."
-        };
-
-        let shareText = `Hey! I just took this Attachment Style Questionnaire and I am a ${highestStyles.join(' and ')} type. `;
-        shareText += highestStyles.map(style => attachmentDescriptions[style]).join(' ');
-        shareText += " Find out your Attachment Style here: https://myattachment.com";
-
-        if (navigator.share) {
-            navigator.share({
-                title: 'My Attachment Style Results',
-                text: shareText,
-                url: 'https://myattachment.com',
-            })
-            .then(() => console.log('Successful share'))
-            .catch((error) => console.log('Error sharing', error));
-        } else {
-            const dummyTextArea = document.createElement('textarea');
-            dummyTextArea.value = shareText;
-            document.body.appendChild(dummyTextArea);
-            dummyTextArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(dummyTextArea);
-            alert('Share text copied to clipboard! You can now paste it wherever you want to share.');
-        }
-    }
-
-    // Initialize the first question or resume from saved progress
-    currentQuestion = parseInt(localStorage.getItem('currentQuestion')) || 0;
-    showQuestion(currentQuestion);
-});
-</script>
+    </script>
 </body>
 </html>
