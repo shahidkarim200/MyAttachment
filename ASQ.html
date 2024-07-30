@@ -6,6 +6,7 @@
     <title>Attachment Style Questionnaire</title>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
+ <style>
         @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&family=Inter:wght@400;700;900&display=swap');
 
         body {
@@ -456,13 +457,13 @@
             const nextButton = document.getElementById('nextButton');
             const submitButton = document.getElementById('submitButton');
             const progressBar = document.getElementById('progressBar');
-
             let currentQuestion = 0;
             let answers = JSON.parse(localStorage.getItem('attachmentAnswers')) || [];
 
             // Questions array
+            // ADD YOUR QUESTIONS HERE
             const questions = [
-              { text: "I feel at ease in emotional relationships", style: "S" },
+            { text: "I feel at ease in emotional relationships", style: "S" },
         { text: "I would like to be open to others but I feel that I can't trust other people", style: "F" },
         { text: "I feel uncomfortable when relationships with other people become close", style: "S", reverse: true },
         { text: "I would like to have close relationships with other people but I find it difficult to fully trust them", style: "F" },
@@ -483,7 +484,7 @@
         { text: "I usually find other people more interesting than myself", style: "P" },
         { text: "I trust that others will be there for me when I need them", style: "S" },
         { text: "I am wary to get engaged in close relationships because I am afraid to get hurt", style: "F" },
-        { text: "It is important to me to know if others like me", style: "P" }
+        { text: "It is important to me to know if others like me", style: "P" } 
             ];
 
             function showQuestion(index) {
@@ -504,7 +505,6 @@
                 `;
                 updateProgressBar();
                 updateButtonVisibility();
-
                 questionContainer.style.opacity = 0;
                 setTimeout(() => {
                     questionContainer.style.opacity = 1;
@@ -515,7 +515,6 @@
                 prevButton.style.display = currentQuestion === 0 ? 'none' : 'inline-block';
                 nextButton.style.display = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
                 submitButton.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
-
                 if (currentQuestion === 0) {
                     nextButton.style.margin = '0 auto';
                 } else {
@@ -550,8 +549,7 @@
                         currentQuestion++;
                         showQuestion(currentQuestion);
                     }
-                }
-   else {
+                } else {
                     alert('Please answer the current question before proceeding.');
                 }
             });
@@ -574,7 +572,6 @@
             function calculateScores() {
                 let scores = { S: 0, F: 0, P: 0, D: 0 };
                 let counts = { S: 0, F: 0, P: 0, D: 0 };
-
                 questions.forEach((question, index) => {
                     let value = answers[index];
                     if (question.reverse) {
@@ -583,78 +580,50 @@
                     scores[question.style] += value;
                     counts[question.style]++;
                 });
-
                 const means = {
                     Secure: counts.S > 0 ? scores.S / counts.S : 0,
                     Fearful: counts.F > 0 ? scores.F / counts.F : 0,
                     Preoccupied: counts.P > 0 ? scores.P / counts.P : 0,
                     Dismissing: counts.D > 0 ? scores.D / counts.D : 0
                 };
+                displayResults(means);
+            }
 
-           function displayResults(means) {
-    const results = Object.entries(means).map(([style, score]) => ({ style, score }));
-    results.sort((a, b) => b.score - a.score);
-    const highestScore = results[0].score;
-    const highestStyles = results.filter(r => r.score === highestScore).map(r => r.style);
+            function displayResults(means) {
+                const results = Object.entries(means).map(([style, score]) => ({ style, score }));
+                results.sort((a, b) => b.score - a.score);
+                const highestScore = results[0].score;
+                const highestStyles = results.filter(r => r.score === highestScore).map(r => r.style);
+                let resultsHTML = `
+                    <div class="results-container">
+                        <h2>Your Attachment Style Questionnaire Results are:</h2>
+                        <ul>
+                            ${results.map(r => `<li><span>${r.style}:</span> <span>${r.score.toFixed(3)}</span></li>`).join('')}
+                        </ul>
+                        <p>Your Attachment Style${highestStyles.length > 1 ? 's are' : ' is'}:</p>
+                        <p><strong>${highestStyles.join(', ')}</strong></p>
+                        <div class="button-container">
+                            <button id="findOutButton" class="cta-button">Find Out About It</button>
+                            <button id="shareButton" class="secondary-button">Share</button>
+                        </div>
+                    </div>
+                `;
+                questionContainer.innerHTML = resultsHTML;
+                document.getElementById('findOutButton').addEventListener('click', function() {
+                    window.location.href = "AttachmentStyles.html";
+                });
+                
+                document.getElementById('shareButton').addEventListener('click', function() {
+                    shareResults(highestStyles);
+                });
+                prevButton.style.display = 'none';
+                nextButton.style.display = 'none';
+                submitButton.style.display = 'none';
+                progressBar.style.display = 'none';
+                localStorage.removeItem('attachmentAnswers');
+                localStorage.removeItem('currentQuestion');
+            }
 
-    let resultsHTML = `
-        <div class="results-container">
-            <h2>Your Attachment Style Questionnaire Results are:</h2>
-            <ul>
-                ${results.map(r => `<li><span>${r.style}:</span> <span>${r.score.toFixed(3)}</span></li>`).join('')}
-            </ul>
-            <p>Your Attachment Style${highestStyles.length > 1 ? 's are' : ' is'}:</p>
-            <p><strong>${highestStyles.join(', ')}</strong></p>
-            <div class="button-container">
-                <button id="findOutButton" class="cta-button">Find Out About It</button>
-                <button id="shareButton" class="secondary-button">Share</button>
-            </div>
-        </div>
-    `;
-
-    questionContainer.innerHTML = resultsHTML;
-
- const questions = [
-              { text: "I feel at ease in emotional relationships", style: "S" },
-        { text: "I would like to be open to others but I feel that I can't trust other people", style: "F" },
-        { text: "I feel uncomfortable when relationships with other people become close", style: "S", reverse: true },
-        { text: "I would like to have close relationships with other people but I find it difficult to fully trust them", style: "F" },
-        { text: "I prefer that others are independent of me and I am independent of them", style: "D" },
-        { text: "I often wonder whether people like me", style: "P" },
-        { text: "I avoid close ties", style: "S", reverse: true },
-        { text: "I have the impression that usually I like others better than they like me", style: "P" },
-        { text: "I trust other people and I like it when other people can rely on me", style: "S" },
-        { text: "I am often afraid that other people don't like me", style: "P" },
-        { text: "It is important to me to be independent", style: "D" },
-        { text: "I find it easy to get engaged in close relationships with other people", style: "S" },
-        { text: "I feel at ease in intimate relationships", style: "S" },
-        { text: "I like to be self-sufficient", style: "D" },
-        { text: "I don't worry whether people like me or not", style: "P" },
-        { text: "I think it is important that people can rely on each other", style: "S" },
-        { text: "I don't worry about being alone: I don't need other people that strongly", style: "D" },
-        { text: "I am afraid that I will be deceived when I get too close with others", style: "F" },
-        { text: "I usually find other people more interesting than myself", style: "P" },
-        { text: "I trust that others will be there for me when I need them", style: "S" },
-        { text: "I am wary to get engaged in close relationships because I am afraid to get hurt", style: "F" },
-        { text: "It is important to me to know if others like me", style: "P" }
-            ];
-
-    document.getElementById('findOutButton').addEventListener('click', function() {
-        window.location.href = "AttachmentStyles.html";
-    });
-
-    document.getElementById('shareButton').addEventListener('click', function() {
-        shareResults(highestStyles);
-    });
-
-    prevButton.style.display = 'none';
-    nextButton.style.display = 'none';
-    submitButton.style.display = 'none';
-    progressBar.style.display = 'none';
-
-    localStorage.removeItem('attachmentAnswers');
-    localStorage.removeItem('currentQuestion');
-}
             function shareResults(highestStyles) {
                 const attachmentDescriptions = {
                     Secure: "People with a secure attachment style tend to feel comfortable with intimacy and are usually warm and loving.",
@@ -662,11 +631,9 @@
                     Preoccupied: "Individuals with a preoccupied attachment style often seek high levels of intimacy, approval, and responsiveness from their partners.",
                     Dismissing: "People with a dismissing attachment style tend to be emotionally distant and value independence over close relationships."
                 };
-
                 let shareText = `Hey! I just took this Attachment Style Questionnaire and I am a ${highestStyles.join(' and ')} type. `;
                 shareText += highestStyles.map(style => attachmentDescriptions[style]).join(' ');
                 shareText += " Find out your Attachment Style here: https://myattachment.com";
-
                 if (navigator.share) {
                     navigator.share({
                         title: 'My Attachment Style Results',
