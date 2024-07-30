@@ -6,7 +6,7 @@
     <title>Attachment Style Questionnaire</title>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&family=Inter:wght@400;700&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&family=Inter:wght@400;700;900&display=swap');
 
 body {
     background-color: #FFF9F3;
@@ -36,9 +36,11 @@ body {
 
 .header .title {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 900;
     color: #080A47;
-    margin-left: 15%;
+    position: absolute;
+    left: 25%;
+    transform: translateX(-50%);
 }
 
 .container {
@@ -223,12 +225,16 @@ form {
     margin: 0 0 20px 0;
     width: 100%;
     max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .results-container li {
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 .results-container p {
@@ -239,6 +245,22 @@ form {
 .results-container strong {
     display: block;
     margin-bottom: 20px;
+}
+
+.results-container .button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.results-container .cta-button,
+.results-container .secondary-button {
+    margin: 0;
+}
+
+#nextButton {
+    display: inline-block !important;
 }
 
 @media (max-width: 1200px) {
@@ -265,6 +287,8 @@ form {
         top: 20px;
     }
     .header .title {
+        position: static;
+        transform: none;
         margin-left: 0;
         margin-bottom: 10px;
     }
@@ -274,14 +298,14 @@ form {
         padding: 15px;
     }
     h1 {
-        font-size: 1.6em;
+        font-size: 1.8em;
     }
     .question p {
-        font-size: 1.1em;
+        font-size: 1.3em;
     }
     .option label {
-        font-size: 0.9em;
-        padding: 8px 15px;
+        font-size: 1.1em;
+        padding: 12px 20px;
     }
     .submit-container {
         flex-direction: column;
@@ -291,50 +315,59 @@ form {
     .submit-container button,
     .cta-button,
     .secondary-button {
-        font-size: 1em;
-        padding: 8px 16px;
+        font-size: 1.2em;
+        padding: 12px 24px;
         width: 80%;
-        margin: 5px 0;
+        margin: 10px 0;
     }
     .floating-image-top,
     .floating-image-bottom {
         width: 70vw;
         max-width: 400px;
     }
+    .results-container .button-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    .results-container .cta-button,
+    .results-container .secondary-button {
+        width: 80%;
+    }
 }
 
 @media (max-width: 480px) {
     body {
-        font-size: 14px;
+        font-size: 16px;
     }
     .header {
         top: 10px;
     }
     .header .title {
-        font-size: 18px;
+        font-size: 20px;
         border-bottom: 2px solid #080A47;
         padding-bottom: 5px;
     }
     .container {
         width: 95%;
-        padding: 10px;
+        padding: 15px;
     }
     h1 {
-        font-size: 1.4em;
+        font-size: 1.6em;
     }
     .question p {
-        font-size: 1em;
+        font-size: 1.2em;
     }
     .option label {
-        font-size: 0.8em;
-        padding: 6px 12px;
+        font-size: 1em;
+        padding: 10px 16px;
     }
     .submit-container input[type="submit"],
     .submit-container button,
     .cta-button,
     .secondary-button {
-        font-size: 0.9em;
-        padding: 6px 12px;
+        font-size: 1.1em;
+        padding: 10px 20px;
     }
     .floating-image-top,
     .floating-image-bottom {
@@ -406,30 +439,36 @@ document.addEventListener('DOMContentLoaded', function() {
         { text: "It is important to me to know if others like me", style: "P" }
      ];
 
-    function showQuestion(index) {
-        const question = questions[index];
-        questionContainer.innerHTML = `
-            <div class="question" aria-live="polite">
-                <p id="questionText">${index + 1}. ${question.text}</p>
-                <div class="options-container" role="radiogroup" aria-labelledby="questionText">
-                    ${['Strongly Agree', 'Agree', 'Neutral', 'Disagree', 'Strongly Disagree'].map((option, i) => `
-                        <div class="option">
-                            <input type="radio" id="q${index}-${i}" name="q${index}" value="${5 - i}" required 
-                                ${answers[index] === 5 - i ? 'checked' : ''}>
-                            <label for="q${index}-${i}">${option}</label>
-                        </div>
-                    `).join('')}
-                </div>
+   function showQuestion(index) {
+    const question = questions[index];
+    questionContainer.innerHTML = `
+        <div class="question" aria-live="polite">
+            <p id="questionText">${index + 1}. ${question.text}</p>
+            <div class="options-container" role="radiogroup" aria-labelledby="questionText">
+                ${['Strongly Agree', 'Agree', 'Neutral', 'Disagree', 'Strongly Disagree'].map((option, i) => `
+                    <div class="option">
+                        <input type="radio" id="q${index}-${i}" name="q${index}" value="${5 - i}" required 
+                            ${answers[index] === 5 - i ? 'checked' : ''}>
+                        <label for="q${index}-${i}">${option}</label>
+                    </div>
+                `).join('')}
             </div>
-        `;
-        updateProgressBar();
-        updateButtonVisibility();
+        </div>
+    `;
+    updateProgressBar();
+    updateButtonVisibility();
 
-        questionContainer.style.opacity = 0;
-        setTimeout(() => {
-            questionContainer.style.opacity = 1;
-        }, 50);
-    }
+    questionContainer.style.opacity = 0;
+    setTimeout(() => {
+        questionContainer.style.opacity = 1;
+    }, 50);
+}
+
+function updateButtonVisibility() {
+    prevButton.style.display = currentQuestion === 0 ? 'none' : 'inline-block';
+    nextButton.style.display = 'inline-block'; // Always show the Next button
+    submitButton.style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
 
     function updateProgressBar() {
         const progress = ((currentQuestion + 1) / questions.length) * 100;
