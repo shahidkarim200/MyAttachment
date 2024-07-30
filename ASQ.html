@@ -6,7 +6,7 @@
     <title>Attachment Style Questionnaire</title>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-       body {
+      body {
     font-family: 'Inter', sans-serif;
     background-color: #FFF9F3;
     color: #080A47;
@@ -29,6 +29,7 @@
     position: absolute;
     top: 20px;
     left: 25%;
+    z-index: 2;
 }
 
 .container {
@@ -41,6 +42,7 @@
     position: relative;
     text-align: center;
     z-index: 1;
+    box-sizing: border-box;
 }
 
 h1 {
@@ -95,6 +97,7 @@ form {
     display: block;
     width: 100%;
     text-align: center;
+    box-sizing: border-box;
 }
 
 .option input[type="radio"]:checked + label,
@@ -149,9 +152,10 @@ form {
 
 .floating-image-top {
     position: absolute;
-    top: -150px;
-    right: -150px;
-    width: 50vw;
+    top: -100px;
+    right: -100px;
+    width: 40vw;
+    max-width: 300px;
     height: auto;
     animation: floatImage 3s ease-in-out infinite;
     transform: rotate(15deg);
@@ -160,9 +164,10 @@ form {
 
 .floating-image-bottom {
     position: absolute;
-    bottom: -150px;
-    left: -150px;
-    width: 50vw;
+    bottom: -100px;
+    left: -100px;
+    width: 40vw;
+    max-width: 300px;
     height: auto;
     animation: floatImage 3s ease-in-out infinite;
     transform: rotate(-15deg);
@@ -221,14 +226,14 @@ form {
 @media (max-width: 767px) {
     body {
         font-size: 16px;
-        padding: 0;
+        padding: 10px;
         margin: 0;
         overflow-x: hidden;
         width: 100vw;
     }
 
     .header {
-        font-size: 24px;
+        font-size: 20px;
         top: 10px;
         left: 50%;
         transform: translateX(-50%);
@@ -237,20 +242,19 @@ form {
     }
 
     .container {
-        width: 90%;
+        width: 95%;
         max-width: none;
-        margin: 60px auto 20px;
-        padding: 20px;
-        box-sizing: border-box;
+        margin: 50px auto 20px;
+        padding: 15px;
     }
 
     h1 {
-        font-size: 2em;
-        margin-bottom: 20px;
+        font-size: 1.8em;
+        margin-bottom: 15px;
     }
 
     .question p {
-        font-size: 1.2em;
+        font-size: 1.1em;
     }
 
     .options-container {
@@ -259,12 +263,12 @@ form {
 
     .option {
         width: 100%;
-        margin: 10px 0;
+        margin: 5px 0;
     }
 
     .option label {
-        font-size: 1.1em;
-        padding: 12px 20px;
+        font-size: 1em;
+        padding: 10px 15px;
     }
 
     .submit-container {
@@ -274,29 +278,29 @@ form {
 
     .submit-container input[type="submit"],
     .submit-container button {
-        font-size: 1.2em;
-        padding: 12px 24px;
-        margin: 10px 0;
-        width: 80%;
+        font-size: 1.1em;
+        padding: 10px 20px;
+        margin: 5px 0;
+        width: 100%;
     }
 
     .floating-image-top {
-        top: -20px;
-        right: -20px;
-        width: 40%;
-        max-width: none;
+        top: -50px;
+        right: -50px;
+        width: 35%;
+        max-width: 150px;
     }
 
     .floating-image-bottom {
-        bottom: -20px;
-        left: -20px;
-        width: 40%;
-        max-width: none;
+        bottom: -50px;
+        left: -50px;
+        width: 35%;
+        max-width: 150px;
     }
 
     #progressBar {
-        width: 90%;
-        margin: 0 auto 20px;
+        width: 100%;
+        margin: 0 auto 15px;
     }
 }
 </style>
