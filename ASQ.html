@@ -6,198 +6,178 @@
     <title>Attachment Style Questionnaire</title>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FFF9F3;
-            color: #080A47;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-            overflow-x: hidden;
-            min-height: 100vh;
-            margin: 0;
-            position: relative;
-        }
+       body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFF9F3;
+    color: #080A47;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    overflow-x: hidden;
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+}
 
-        .header {
-            font-family: 'Inter', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: #080a47;
-            position: absolute;
-            top: 20px;
-            left: 25%;
-        }
+.header {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #080a47;
+    position: absolute;
+    top: 20px;
+    left: 25%;
+}
 
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background-color: #FFF9F3;
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            position: relative;
-            text-align: center;
-            z-index: 1;
-        }
-
-        h1 {
-            font-family: 'Hanken Grotesk', sans-serif;
-            font-size: 2em;
-            text-align: center;
-            color: #080A47;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .question {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .question p {
-        font-size: 1.2em;
-        margin-bottom: 20px;
-    }
-
-    .options-container {
+.container {
+    max-width: 800px;
     width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
+    background-color: #FFF9F3;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    text-align: center;
+    z-index: 1;
+}
+
+h1 {
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 2em;
+    text-align: center;
+    color: #080A47;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.question {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.question p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
 }
 
 .option {
+    display: block;
+    margin: 10px 0;
     width: 100%;
+    max-width: 300px;
 }
 
-    .option input[type="radio"] {
-        display: none;
+.option input[type="radio"] {
+    display: none;
+}
+
+.option label {
+    font-size: 1em;
+    padding: 10px 20px;
+    border: 2px solid #080A47;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.option input[type="radio"]:checked + label,
+.option label:hover {
+    background-color: #080A47;
+    color: #FFF9F3;
+    transform: scale(1.05);
+}
+
+.submit-container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.submit-container input[type="submit"],
+.submit-container button {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    color: #FFF9F3;
+    background-color: #080A47;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.submit-container input[type="submit"]:hover,
+.submit-container button:hover {
+    background-color: #1a1c7a;
+    transform: scale(1.05);
+}
+
+#progressBar {
+    width: 100%;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#progressBar::before {
+    content: '';
+    display: block;
+    height: 100%;
+    background-color: #080A47;
+    border-radius: 5px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.floating-image-top {
+    position: absolute;
+    top: -150px;
+    right: -150px;
+    width: 50vw;
+    height: auto;
+    animation: floatImage 3s ease-in-out infinite;
+    transform: rotate(15deg);
+    z-index: 0;
+}
+
+.floating-image-bottom {
+    position: absolute;
+    bottom: -150px;
+    left: -150px;
+    width: 50vw;
+    height: auto;
+    animation: floatImage 3s ease-in-out infinite;
+    transform: rotate(-15deg);
+    z-index: 0;
+}
+
+@keyframes floatImage {
+    0%, 100% {
+        transform: translateY(0) rotate(15deg);
     }
-
-    .option label {
-        font-size: 1em;
-        padding: 10px 20px;
-        border: 2px solid #080A47;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-        display: block;
-        width: 100%;
-        text-align: center; /* Center-align text within labels */
+    50% {
+        transform: translateY(-10px) rotate(15deg);
     }
-
-        .option input[type="radio"]:checked + label,
-        .option label:hover {
-            background-color: #080A47;
-            color: #FFF9F3;
-            transform: scale(1.05);
-        }
-
-        .submit-container {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-        }
-
-        .submit-container input[type="submit"],
-        .submit-container button {
-            font-size: 1.2em;
-            padding: 10px 20px;
-            color: #FFF9F3;
-            background-color: #080A47;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-
-        .submit-container input[type="submit"]:hover,
-        .submit-container button:hover {
-            background-color: #1a1c7a;
-            transform: scale(1.05);
-        }
-
-        #progressBar {
-            width: 100%;
-            height: 10px;
-            background-color: #ddd;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        #progressBar::before {
-            content: '';
-            display: block;
-            height: 100%;
-            background-color: #080A47;
-            border-radius: 5px;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .floating-image-top {
-            position: absolute;
-            top: -150px;
-            right: -150px;
-            width: 50vw;
-            height: auto;
-            animation: floatImage 3s ease-in-out infinite;
-            transform: rotate(15deg);
-            z-index: 0;
-        }
-
-        .floating-image-bottom {
-            position: absolute;
-            bottom: -150px;
-            left: -150px;
-            width: 50vw;
-            height: auto;
-            animation: floatImage 3s ease-in-out infinite;
-            transform: rotate(-15deg);
-            z-index: 0;
-        }
-
-        @keyframes floatImage {
-            0%, 100% {
-                transform: translateY(0) rotate(15deg);
-            }
-            50% {
-                transform: translateY(-10px) rotate(15deg);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .floating-image-top,
-            .floating-image-bottom {
-                width: 70vw;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .floating-image-top,
-            .floating-image-bottom {
-                width: 80vw;
-            }
-        }
-ul {
-    list-style-type: none;
-    padding: 0;
 }
 
-li {
-    margin-bottom: 10px;
-}
 .cta-button {
     background-color: #3A30BA;
     color: white;
@@ -237,15 +217,18 @@ li {
 .question {
     transition: opacity 0.3s ease;
 }
-@media (max-width: 768px) {
+
+@media (max-width: 767px) {
     body {
         font-size: 16px;
-        padding: 10px;
+        padding: 0;
+        margin: 0;
         overflow-x: hidden;
+        width: 100vw;
     }
 
     .header {
-        font-size: 22px;
+        font-size: 24px;
         top: 10px;
         left: 50%;
         transform: translateX(-50%);
@@ -254,79 +237,66 @@ li {
     }
 
     .container {
-        width: 95%;
+        width: 90%;
         max-width: none;
         margin: 60px auto 20px;
-        padding: 15px;
+        padding: 20px;
         box-sizing: border-box;
     }
 
     h1 {
-        font-size: 1.8em;
+        font-size: 2em;
+        margin-bottom: 20px;
     }
 
     .question p {
-        font-size: 1.1em;
+        font-size: 1.2em;
+    }
+
+    .options-container {
+        width: 100%;
+    }
+
+    .option {
+        width: 100%;
+        margin: 10px 0;
     }
 
     .option label {
-        font-size: 1em;
-        padding: 10px 15px;
+        font-size: 1.1em;
+        padding: 12px 20px;
+    }
+
+    .submit-container {
+        flex-direction: column;
+        align-items: center;
     }
 
     .submit-container input[type="submit"],
     .submit-container button {
-        font-size: 1.1em;
-        padding: 10px 20px;
+        font-size: 1.2em;
+        padding: 12px 24px;
+        margin: 10px 0;
+        width: 80%;
     }
 
     .floating-image-top {
-        top: -50px;
-        right: -50px;
-        width: 60vw;
-        max-width: 200px;
+        top: -20px;
+        right: -20px;
+        width: 40%;
+        max-width: none;
     }
 
     .floating-image-bottom {
-        bottom: -50px;
-        left: -50px;
-        width: 60vw;
-        max-width: 200px;
-    }
-}
-
-@media (max-width: 480px) {
-    body {
-        font-size: 14px;
+        bottom: -20px;
+        left: -20px;
+        width: 40%;
+        max-width: none;
     }
 
-    .header {
-        font-size: 20px;
-    }
-
-    h1 {
-        font-size: 1.6em;
-    }
-
-    .question p {
-        font-size: 1em;
-    }
-
-    .option label {
-        font-size: 0.9em;
-        padding: 8px 12px;
-    }
-
-    .submit-container input[type="submit"],
-    .submit-container button {
-        font-size: 1em;
-        padding: 8px 16px;
-    }
-
-    .floating-image-top,
-    .floating-image-bottom {
-        width: 50vw;
-        max-width: 180px;
+    #progressBar {
+        width: 90%;
+        margin: 0 auto 20px;
     }
 }
 </style>
