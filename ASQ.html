@@ -6,7 +6,7 @@
     <title>Attachment Style Questionnaire</title>
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-   @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&family=Inter:wght@400;700;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&family=Inter:wght@400;700;900&display=swap');
 
 body {
     background-color: #FFF9F3;
@@ -55,6 +55,10 @@ body {
     z-index: 1;
     box-sizing: border-box;
     margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 120px);
 }
 
 h1 {
@@ -73,6 +77,10 @@ form {
 .question {
     text-align: center;
     margin-bottom: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .question p {
@@ -123,21 +131,24 @@ form {
     text-align: center;
     display: flex;
     justify-content: center;
-    gap: 40px;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
 .submit-container input[type="submit"],
 .submit-container button,
 .cta-button,
 .secondary-button {
-    font-size: 1.2em;
-    padding: 10px 20px;
+    font-size: 1em;
+    padding: 10px 15px;
     color: #FFF9F3;
     background-color: #3A30BA;
     border: none;
     border-radius: 25px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
+    min-width: 100px;
 }
 
 .submit-container input[type="submit"]:hover,
@@ -259,80 +270,40 @@ form {
     margin: 0;
 }
 
-#nextButton {
-    display: inline-block !important;
-}
-
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
+    .header {
+        top: 20px;
+    }
     .header .title {
         font-size: 22px;
     }
     .container {
         width: 95%;
-    }
-    h1 {
-        font-size: 1.8em;
-    }
-    .floating-image-top,
-    .floating-image-bottom {
-        width: 60vw;
-        max-width: 500px;
-    }
-}
-
-@media (max-width: 768px) {
-    .header {
-        flex-direction: column;
-        align-items: center;
-        top: 20px;
-    }
-    .header .title {
-        position: static;
-        transform: none;
-        margin-left: 0;
-        margin-bottom: 10px;
-    }
-    .container {
-        width: 90%;
-        margin: 50px auto 20px;
         padding: 15px;
+        min-height: calc(100vh - 80px);
     }
     h1 {
         font-size: 1.8em;
     }
     .question p {
-        font-size: 1.3em;
+        font-size: 1.1em;
     }
     .option label {
-        font-size: 1.1em;
-        padding: 12px 20px;
-    }
-    .submit-container {
-        flex-direction: column;
-        align-items: center;
+        font-size: 0.9em;
+        padding: 8px 12px;
     }
     .submit-container input[type="submit"],
     .submit-container button,
     .cta-button,
     .secondary-button {
-        font-size: 1.2em;
-        padding: 12px 24px;
-        width: 80%;
-        margin: 10px 0;
+        font-size: 0.9em;
+        padding: 8px 12px;
+        min-width: 80px;
     }
     .floating-image-top,
     .floating-image-bottom {
         width: 70vw;
         max-width: 400px;
-    }
-    .results-container .button-container {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-    .results-container .cta-button,
-    .results-container .secondary-button {
-        width: 80%;
     }
 }
 
@@ -345,29 +316,30 @@ form {
     }
     .header .title {
         font-size: 20px;
-        border-bottom: 2px solid #080A47;
-        padding-bottom: 5px;
+        left: 20%;
     }
     .container {
         width: 95%;
-        padding: 15px;
+        padding: 10px;
+        min-height: calc(100vh - 60px);
     }
     h1 {
         font-size: 1.6em;
     }
     .question p {
-        font-size: 1.2em;
+        font-size: 1em;
     }
     .option label {
-        font-size: 1em;
-        padding: 10px 16px;
+        font-size: 0.8em;
+        padding: 6px 10px;
     }
     .submit-container input[type="submit"],
     .submit-container button,
     .cta-button,
     .secondary-button {
-        font-size: 1.1em;
-        padding: 10px 20px;
+        font-size: 0.8em;
+        padding: 6px 10px;
+        min-width: 70px;
     }
     .floating-image-top,
     .floating-image-bottom {
