@@ -21,24 +21,25 @@
     width: 100%;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
-    padding: 10px 20px;
+    align-items: flex-end; /* Changed from center to flex-end */
+    padding: 20px 20px 10px; /* Added top padding */
     position: fixed;
-    top: 10px; /* Changed from 0 to 10px */
+    top: 0;
     left: 0;
     background-color: rgba(255, 249, 243, 0.9);
     z-index: 1000;
     box-sizing: border-box;
+    height: 60px; /* Added fixed height */
 }
 
-        .header .title {
-            font-size: 24px;
-            font-weight: 900;
-            color: #080A47;
-            position: absolute;
-            left: 23%;
-            transform: translateX(-50%);
-        }
+.header .title {
+    font-size: 24px;
+    font-weight: 900;
+    color: #080A47;
+    position: absolute;
+    left: 23%;
+    bottom: 10px; /* Changed from transform to bottom positioning */
+}
 
         .container {
             max-width: 800px;
