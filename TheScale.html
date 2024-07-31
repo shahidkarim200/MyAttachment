@@ -103,32 +103,25 @@
             margin-top: 20px;
         }
 
-       .floating-image {
+      .floating-image {
             position: fixed;
             z-index: 1;
             animation: float 6s ease-in-out infinite;
         }
 
         .floating-image-1 {
-            top: -100px;
-            right: -100px;
-            width: 60vw;
-            max-width: 800px;
+            top: -50px;
+            right: -50px;
+            width: 45vw;
+            max-width: 600px;
         }
 
         .floating-image-2 {
             top: 50%;
-            left: -200px;
-            width: 70vw;
-            max-width: 900px;
-            transform: translateY(-50%);
-        }
-
-        .floating-image-3 {
-            bottom: -100px;
             left: -100px;
-            width: 60vw;
-            max-width: 800px;
+            width: 50vw;
+            max-width: 700px;
+            transform: translateY(-50%);
         }
 
         @keyframes float {
@@ -139,21 +132,16 @@
 
         @media (max-width: 768px) {
             .floating-image-1 {
-                top: -50px;
-                right: -50px;
-                width: 80vw;
+                top: -30px;
+                right: -30px;
+                width: 60vw;
             }
 
             .floating-image-2 {
-                left: -100px;
-                width: 90vw;
-            }
-
-            .floating-image-3 {
-                bottom: -50px;
                 left: -50px;
-                width: 80vw;
+                width: 70vw;
             }
+        }
     </style>
     <script>
         function redirectToTest() {
@@ -164,7 +152,7 @@
 <body>
     <img src="vector-13png_1700130200_54679.png" alt="Floating Image 1" class="floating-image floating-image-1">
     <img src="vector-15png_1700141862_82973.png" alt="Floating Image 2" class="floating-image floating-image-2">
-    <img src="vector-14png_1700131133_65100.png" alt="Floating Image 3" class="floating-image floating-image-3">
+
 
     <div class="header">
         <div class="title">MyAttachment</div>
