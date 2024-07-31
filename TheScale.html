@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>About the Scale - MyAttachment</title>
+    <link rel="icon" href="logo.html" type="image/x-icon" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;700&family=Inter:wght@400;700;900&display=swap');
+
+        body {
+            background-color: #FFF9F3;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header .title {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: #080A47;
+            margin-left: 15%;
+        }
+
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-title {
+            font-family: 'Hanken Grotesk', sans-serif;
+            font-size: 48px;
+            font-weight: bolder;
+            color: #080A47;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #080A47;
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .image-item {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .image-caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #080A47;
+            margin-top: 10px;
+        }
+
+        .button {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #3A30BA;
+            cursor: pointer;
+            background-color: #3A30BA;
+            color: white;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .floating-image {
+            position: fixed;
+            width: 300px;
+            height: auto;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-image-1 { top: 10%; left: -100px; }
+        .floating-image-2 { top: 40%; right: -100px; }
+        .floating-image-3 { bottom: 20%; left: -150px; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                justify-content: center;
+            }
+
+            .header .title {
+                margin-left: 0;
+            }
+
+            .image-item {
+                width: 80%;
+            }
+
+            .floating-image {
+                width: 200px;
+            }
+
+            .floating-image-1 { top: 5%; left: -100px; }
+            .floating-image-2 { top: 50%; right: -100px; }
+            .floating-image-3 { bottom: 10%; left: -100px; }
+        }
+    </style>
+    <script>
+        function redirectToTest() {
+            window.location.href = "ASQ.html";
+        }
+    </script>
+</head>
+<body>
+    <img src="floating-image-1.png" alt="Floating Image 1" class="floating-image floating-image-1">
+    <img src="floating-image-2.png" alt="Floating Image 2" class="floating-image floating-image-2">
+    <img src="floating-image-3.png" alt="Floating Image 3" class="floating-image floating-image-3">
+
+    <div class="header">
+        <div class="title">MyAttachment</div>
+    </div>
+
+    <div class="main-content">
+        <h1 class="main-title">The Scale</h1>
+
+        <div class="description">
+            <!-- Add your description about the scale here -->
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim. Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus.
+        </div>
+
+        <div class="image-container">
+            <div class="image-item">
+                <img src="C:\Users\shahi\Downloads\Secured_InternalConsistency.jpg" alt="Scale Image 1">
+                <p class="image-caption">Internal Consistency (Cronbach's alpha) for Secure Attachment Category (ASQ)</p>
+            </div>
+            <div class="image-item">
+                <img src="C:\Users\shahi\Downloads\Preoccupied__InternalConsistency.jpg" alt="Scale Image 2">
+                <p class="image-caption">Internal Consistency (Cronbach's alpha) for Preoccupied Attachment Category (ASQ)</p>
+            </div>
+            <div class="image-item">
+                <img src="C:\Users\shahi\Downloads\Dismissive_InternalConsistency.jpg" alt="Scale Image 3">
+                <p class="image-caption">Internal Consistency (Cronbach's alpha) for Dismissive Attachment Category (ASQ)</p>
+            </div>
+            <div class="image-item">
+                <img src="C:\Users\shahi\Downloads\Fearful_InternalConsistency.jpg" alt="Scale Image 4">
+                <p class="image-caption">Internal Consistency (Cronbach's alpha) for Fearful Attachment Category (ASQ)</p>
+            </div>
+        </div>
+
+        <div class="button" onclick="redirectToTest()">Find Out Your Attachment Style</div>
+    </div>
+</body>
+</html>
