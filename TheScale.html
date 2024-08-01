@@ -120,29 +120,43 @@
         }
 
         .floating-image {
-            position: fixed;
+            position: absolute;
             z-index: 1;
+            pointer-events: none;
         }
 
         .floating-image-1 {
             top: 0;
             right: 0;
-            width: 25vw;
-            max-width: 300px;
+            width: 35vw;
+            max-width: 400px;
+            animation: float-1 6s ease-in-out infinite;
         }
 
         .floating-image-2 {
             bottom: 0;
             left: 0;
-            width: 25vw;
-            max-width: 300px;
+            width: 35vw;
+            max-width: 400px;
+            animation: float-2 8s ease-in-out infinite;
+        }
+
+        @keyframes float-1 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-10px, 10px); }
+        }
+
+        @keyframes float-2 {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, -10px); }
         }
 
         @media (max-width: 768px) {
-            .header {
-                justify-content: center;
-                padding: 10px;
+            .floating-image-1, .floating-image-2 {
+                width: 30vw;
+                max-width: 200px;
             }
+        }
 
             .header .title {
                 margin-left: 0;
