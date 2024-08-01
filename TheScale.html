@@ -10,7 +10,7 @@
 
         body {
             background-color: #FFF9F3;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -45,6 +45,9 @@
             padding: 20px;
             position: relative;
             z-index: 2;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         .main-title {
@@ -61,12 +64,13 @@
             color: #080A47;
             margin-bottom: 40px;
             text-align: left;
+            line-height: 1.6;
         }
 
         .image-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 30px;
             margin-bottom: 40px;
         }
@@ -80,6 +84,7 @@
             width: 100%;
             height: auto;
             border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
 
         .image-caption {
@@ -90,55 +95,50 @@
         }
 
         .button-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.button {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    padding: 10px 20px;
-    border-radius: 25px;
-    border: 2px solid #3A30BA;
-    cursor: pointer;
-    background-color: #3A30BA;
-    color: white;
-    display: inline-block;
-    margin: 20px auto 0;
-}
-
+            display: flex;
+            justify-content: center;
+            width: 100%;
         }
 
-      .floating-image {
+        .button {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 15px 30px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            background-color: #3A30BA;
+            color: white;
+            display: inline-block;
+            margin: 20px auto;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #2A20A0;
+        }
+
+        .floating-image {
             position: fixed;
             z-index: 1;
-            animation: float 6s ease-in-out infinite;
         }
 
         .floating-image-1 {
-            top: -50px;
-            right: -50px;
-            width: 45vw;
-            max-width: 600px;
+            top: 0;
+            right: 0;
+            width: 25vw;
+            max-width: 300px;
         }
 
         .floating-image-2 {
-            top: 50%;
-            left: -100px;
-            width: 50vw;
-            max-width: 700px;
-            transform: translateY(-50%);
+            bottom: 0;
+            left: 0;
+            width: 25vw;
+            max-width: 300px;
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(-10px, -20px); }
-            100% { transform: translate(0, 0); }
-        }
-
-      @media (max-width: 768px) {
+        @media (max-width: 768px) {
             .header {
                 justify-content: center;
                 padding: 10px;
@@ -148,34 +148,19 @@
                 margin-left: 0;
             }
 
-            .floating-image-1 {
-                top: 0;
-                right: 0;
-                width: 40vw;
-                max-width: 200px;
-            }
-
-            .floating-image-2 {
-                bottom: 0;
-                left: 0;
-                top: auto;
-                width: 40vw;
-                max-width: 200px;
-                transform: none;
+            .floating-image-1, .floating-image-2 {
+                width: 20vw;
+                max-width: 150px;
             }
 
             .main-content {
-                position: relative;
-                z-index: 2;
-                background-color: rgba(255, 249, 243, 0.8);
-                border-radius: 10px;
-                padding: 20px;
                 margin-top: 20px;
             }
 
             .main-title {
                 font-size: 36px;
             }
+
             .description {
                 font-size: 16px;
             }
@@ -191,54 +176,57 @@
     <img src="vector-13png_1700130200_54679.png" alt="Floating Image 1" class="floating-image floating-image-1">
     <img src="vector-15png_1700141862_82973.png" alt="Floating Image 2" class="floating-image floating-image-2">
 
-
     <div class="header">
         <div class="title">MyAttachment</div>
     </div>
 
     <div class="main-content">
         <h1 class="main-title">The Scale</h1>
-
         <div class="description">
-            <!-- Add your description about the scale here -->
-            The Attachment Style Questionnaire (ASQ) was adopted from Polek, E. (2008). Attachment in cultural context: Differences in attachment between Eastern
-            and Western Europeans carried out in University of Groningen, Faculty of Behavioural and Social; which was further adopted from a Dutch 
-            study on Attachment Style by Van Oudenhoven, J. P., Hofstra, J., & Bakker, W. (2003). Ontwikkeling en evaluatie van de Hechtingstijlvragenlijst 
-            (HSL) [Development and evaluation of the Attachment Styles Questionnaire]. Nederlands Tijdschrift voor de Psychologie, 58, 95-102.
-<br>
-            <br>
-            
-            Polek & E had translated the original Dutch questionnaire into English and modified the questionnaire; altering questions or removing due to avoid iirelevancy.
-            <br>
-            The ASQ is based on the Four-Factor Model of Attachment, also known as the two dimensional model of Attachment, which states that there are 4 styles of attachment namely; secure, preoccupied, dismissing, and fearful.
-            <br>
-            <br>
-            To learn more about the Attachment Styles, please refer to our "Attachment Styles" on the home page.
-<br>
-            <br>
-            We then tested the ASQ for internal consistency (Cronbach's alpha) on a sample size of 122 individuals with diverse demographics pertaining to age, 
-            gender, ethnicity. In statistics and research, internal consistency is typically a measure based on the correlations between different items on the same test (or the same subscale on a larger test).
-            It measures whether several items that propose to measure the same general construct produce similar scores (Wikipedia). Cronbach's Alpha was developed by Lee Cronbach in 1951 to provide a measure of the internal consistency of a test or scale
-            <br>
-            <br>
-            Alpha Cronbach Value;             Interpretation
-            <br>
-            <br>
-            0.91-1.00;                          Excellent
-            <br>
-            0.81-0.90;                            Good
-            <br>
-            0.71-0.80;                      Good & Acceptable
-            <br>
-            0.61-0.70;                          Acceptable
-            <br>
-            0.01-0.60;                        Non acceptable
-<br>                        
-                                               (Konting et al., 2009)
+            <p>The Attachment Style Questionnaire (ASQ) was adopted from Polek, E. (2008). Attachment in cultural context: Differences in attachment between Eastern and Western Europeans carried out in University of Groningen, Faculty of Behavioural and Social; which was further adopted from a Dutch study on Attachment Style by Van Oudenhoven, J. P., Hofstra, J., & Bakker, W. (2003).</p>
 
-        <br>
-            <br>
-            Below are the Alpha Cronbach values for the four Attachment Style questio categories on the ASQ:-
+            <p>Polek & E had translated the original Dutch questionnaire into English and modified the questionnaire; altering questions or removing due to avoid irrelevancy.</p>
+
+            <p>The ASQ is based on the Four-Factor Model of Attachment, also known as the two dimensional model of Attachment, which states that there are 4 styles of attachment namely; secure, preoccupied, dismissing, and fearful.</p>
+
+            <p>To learn more about the Attachment Styles, please refer to <a href="https://myattachment.in/TheAttachmentStyles" target="_blank">"Attachment Styles"</a>.</p>
+
+            <p>We then tested the ASQ for internal consistency (Cronbach's alpha) on a sample size of 122 individuals with diverse demographics pertaining to age, gender, ethnicity. In statistics and research, internal consistency is typically a measure based on the correlations between different items on the same test (or the same subscale on a larger test). It measures whether several items that propose to measure the same general construct produce similar scores (Wikipedia).</p>
+
+            <p>Cronbach's Alpha was developed by Lee Cronbach in 1951 to provide a measure of the internal consistency of a test or scale.</p>
+
+            <table style="margin: 20px auto; border-collapse: collapse;">
+                <tr>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Alpha Cronbach Value</th>
+                    <th style="border: 1px solid #ddd; padding: 8px;">Interpretation</th>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.91-1.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Excellent</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.81-0.90</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Good</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.71-0.80</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Good & Acceptable</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.61-0.70</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Acceptable</td>
+                </tr>
+                <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.01-0.60</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Non acceptable</td>
+                </tr>
+            </table>
+
+            <p style="text-align: center;">(Konting et al., 2009)</p>
+
+            <p>Below are the Alpha Cronbach values for the four Attachment Style question categories on the ASQ:</p>
+        </div>
+
         <div class="image-container">
             <div class="image-item">
                 <img src="Secured_InternalConsistency (1).jpg" alt="Scale Image 1">
@@ -258,7 +246,9 @@
             </div>
         </div>
 
-        <div class="button" onclick="redirectToTest()">Find Out Your Attachment Style</div>
+        <div class="button-container">
+            <div class="button" onclick="redirectToTest()">Find Out Your Attachment Style</div>
+        </div>
     </div>
 </body>
 </html>
